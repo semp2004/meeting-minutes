@@ -4,6 +4,11 @@ namespace App\Enums;
 
 enum Permission
 {
-    case MAKE_MEETING;
-    case JEMAMA_IS_EEN_HOND;
+    case AdminToolbar;
+    case NewUser;
+    case EditUser;
+    case DeleteUser;
+
+    case NewTemplate;
+    case EditTemplate;
 }

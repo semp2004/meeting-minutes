@@ -20,7 +20,6 @@ class PermissionMiddleware
      */
     public function handle(Request $request, Closure $next, string $permissions): Response
     {
-        $Allowed = true;
         $PermissionArray = explode('&', $permissions);
 
         $UserId = $request->user()?->id;
@@ -36,17 +35,14 @@ class PermissionMiddleware
         // Loop through the required permissions and check if the user has them, if the user doesn't have one of the permissions, set $Allowed to false
         foreach ($PermissionArray as $PermissionArrayItem) {
             if (!$UserPermissions->contains($PermissionArrayItem)) {
-                $Allowed = false;
+                return abort(403);
             }
         }
 
         // If the user has all the permissions, return the next middleware
-        if ($Allowed) {
-            return $next($request);
-        }
+        return $next($request);
 
-        // User didn't pass the checks, return a 403 response
-        abort(403);
+
     }
 
     /**
