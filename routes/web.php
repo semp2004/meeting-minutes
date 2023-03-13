@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Request;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,5 +44,9 @@ Route::middleware('permission:'.\App\Enums\Permission::AdminView ->name) -> grou
 //  Edit template
     Route::get('/admin/EditTemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'index']);
     Route::post('/admin/EditTemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'store']);
+
+    Route::get('/admin/register', [RegisteredUserController::class, 'create']) -> middleware('permission:' . \App\Enums\Permission::NewUser -> name)
+        ->name('register');
+    Route::post('/admin/register', [RegisteredUserController::class, 'store']) -> middleware('permission:' . \App\Enums\Permission::NewUser -> name);
 
 });
