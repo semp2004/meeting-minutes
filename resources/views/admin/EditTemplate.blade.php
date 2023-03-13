@@ -22,6 +22,20 @@
         string = string.replaceAll('</div>', '');
         string = string.replaceAll('<br>', '\n');
 
+        function SetValue() {
+            try {
+                EditorOBJ = document.getElementById('editor');
+                EditorOBJ.editor.insertString(string);
+            } catch (e) {
+                console.log(e);
+                window.location.reload();
+            }
+        }
+
+        window.onload = () => {
+            SetValue();
+        };
+
 
         function submit() {
             const currentUrl = window.location.href;
@@ -41,10 +55,7 @@
         }
 
 
-        window.onload = () => {
-            console.log(string)
-            EditorOBJ.editor.insertString(string);
-        };
+
     </script>
 @endsection
 
