@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum Permission
 {
-    case AdminToolbar;
+    case AdminView;
     case NewUser;
     case EditUser;
     case DeleteUser;

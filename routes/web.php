@@ -33,3 +33,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::middleware('permission:'.\App\Enums\Permission::AdminView ->name) -> group(function() {
+//  New template
+    Route::get('/admin/NewTemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'index']);
+    Route::post('/admin/NewTemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'store']);
+
+//  Edit template
+    Route::get('/admin/EditTemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'index']);
+    Route::post('/admin/EditTemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'store']);
+
+});
