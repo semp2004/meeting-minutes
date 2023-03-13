@@ -24,8 +24,10 @@
 
         function SetValue() {
             try {
-                EditorOBJ = document.getElementById('editor');
-                EditorOBJ.editor.insertString(string);
+                setTimeout(function() {
+                    EditorOBJ = document.getElementById('editor');
+                    EditorOBJ.editor.insertString(string);
+                }, 150)
             } catch (e) {
                 console.log(e);
                 window.location.reload();
