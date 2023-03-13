@@ -16,3 +16,7 @@
 [Laravel Docs](https://laravel.com/docs/10.x/)
 
 [Tailwind Docs](https://tailwindcss.com/)
+
+[Trix editor](https://github.com/basecamp/trix)
+
+[Sweetalert](https://sweetalert.js.org/guides/)
