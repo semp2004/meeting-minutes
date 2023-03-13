@@ -14,9 +14,14 @@
         <!-- Tailwind CDN -->
         <script src="https://cdn.tailwindcss.com"></script>
 
+        <!-- SweetAlert CDN -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        @yield('head')
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
