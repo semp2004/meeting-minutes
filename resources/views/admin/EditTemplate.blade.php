@@ -22,7 +22,6 @@
         string = string.replaceAll('</div>', '');
         string = string.replaceAll('<br>', '\n');
 
-        EditorOBJ.editor.insertString(string);
 
         function submit() {
             const currentUrl = window.location.href;
@@ -40,6 +39,12 @@
                 swal("Template geupdate!", "Template is succesvol opgeslagen!", "success");
             });
         }
+
+
+        window.onload = () => {
+            console.log(string)
+            EditorOBJ.editor.insertString(string);
+        };
     </script>
 @endsection
 
