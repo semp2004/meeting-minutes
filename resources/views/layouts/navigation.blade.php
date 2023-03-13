@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ Auth::user() ? __('Dashboard') : __('Log in') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -39,6 +39,7 @@
                         </x-dropdown-link>
 
                         <!-- Authentication -->
+                        @if (Auth::user())
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
@@ -48,6 +49,7 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+                        @endif
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -76,7 +78,7 @@
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name ?? 'none' }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email ?? 'none email' }}</div>
+                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email ?? 'none' }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
