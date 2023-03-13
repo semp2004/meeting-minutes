@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\TestController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);
+
+Route::get('/authenticated', [\App\Http\Controllers\HomePageController::class, 'index']) ->middleware('permission:'.\App\Enums\Permission::MAKE_MEETING ->name . '&' . \App\Enums\Permission::JEMAMA_IS_EEN_HOND ->name);
 
 //Route::get('/', function () {
 //    return view('welcome');
