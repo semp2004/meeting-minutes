@@ -23,7 +23,7 @@ class PermissionMiddleware
         $PermissionArray = explode('&', $permissions);
 
         $UserId = $request->user()?->id;
-        $UserModel = User::where('id', $UserId) -> first();
+        $UserModel = User::where('id', $UserId) -> FirstOrFail();
         $UserPermissions = $UserModel -> permissions;
 
         // Convert the permission names to ids

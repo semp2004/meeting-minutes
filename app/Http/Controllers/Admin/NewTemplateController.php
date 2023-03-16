@@ -9,7 +9,7 @@ class NewTemplateController extends Controller
 {
     public function index()
     {
-        return view('admin.NewTemplate');
+        return view('admin.templates.NewTemplate');
     }
 
     public function store(Request $request){
