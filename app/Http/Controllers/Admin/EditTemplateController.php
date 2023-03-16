@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\template;
 use Illuminate\Http\Request;
-use App\Models\Template;
 
 class EditTemplateController extends Controller
 {
