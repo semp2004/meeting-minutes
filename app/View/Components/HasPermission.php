@@ -23,8 +23,9 @@ class HasPermission extends Component
      */
     public function HasPermissions(): bool
     {
-        $User = auth()->user()->id;
-        $UserModel = User::where('id', $User)->firstOrFail();
+        $User = auth()->user()?->id;
+        if(!$User) {return false;}
+        $UserModel = User::where('id', $User || 0)->firstOrFail();
         $UserPermissions = $UserModel->permissions();
 
         $PermissionId = Permission::where('name', $this->permissionName)->firstOrFail()->id;
