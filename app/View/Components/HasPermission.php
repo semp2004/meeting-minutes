@@ -4,7 +4,6 @@ namespace App\View\Components;
 
 use App\Models\Permission;
 use App\Models\User;
-use App\Models\UserPermission;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -16,7 +15,6 @@ class HasPermission extends Component
      */
     public function __construct(public string $permissionName)
     {
-        $this->permissionName = $permissionName;
     }
 
     /**
@@ -25,13 +23,13 @@ class HasPermission extends Component
      */
     public function HasPermissions(): bool
     {
-        $User = auth()->user() -> id;
+        $User = auth()->user()->id;
         $UserModel = User::where('id', $User)->firstOrFail();
         $UserPermissions = $UserModel->permissions();
 
-        $PermissionId = Permission::where('name', $this->permissionName)->firstOrFail() -> id;
+        $PermissionId = Permission::where('name', $this->permissionName)->firstOrFail()->id;
 
-        $HasPermissions = $UserPermissions->pluck('permission_id') -> contains($PermissionId);
+        $HasPermissions = $UserPermissions->pluck('permission_id')->contains($PermissionId);
         return $HasPermissions;
     }
 
@@ -40,7 +38,7 @@ class HasPermission extends Component
      */
     public function render(): View|Closure|string
     {
-        if(!$this->HasPermissions()) {
+        if (!$this->HasPermissions()) {
             return "";
         }
         return view('components.has-permission');
