@@ -2,8 +2,8 @@
 
 namespace App\View\Components;
 
-use App\Models\Permission;
-use App\Models\User;
+use App\Enums\Permission;
+use App\Models\UserPermission;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -18,18 +18,35 @@ class HasPermission extends Component
     }
 
     /**
+     * @param string $value the value to look for
+     * @return int the key of the value in Permissions
+     */
+    private function PermissionValueToKey(string $value): int
+    {
+        $Cases = Permission::cases();
+        $ReturnValue = 0;
+        for ($i = 0; $i < count($Cases); $i++) {
+            if ($Cases[$i]->name == $value) {
+                $ReturnValue = $i + 1;
+            }
+        }
+        return $ReturnValue;
+    }
+
+
+    /**
      * Check if the user has the $permission.
      * @return bool user has permission
      */
-    public function HasPermissions(): bool
+    private function HasPermissions(): bool
     {
         $User = auth()->user()?->id;
-        if(!$User) {return false;}
-        $UserModel = User::where('id', $User || 0)->firstOrFail();
-        $UserPermissions = $UserModel->permissions();
+        if (!$User) return false;
 
-        $PermissionId = Permission::where('name', $this->permissionName)->firstOrFail()->id;
+        $UserPermissions = UserPermission::where('user_id', $User)->get('permission_id');
 
+
+        $PermissionId = $this->PermissionValueToKey(value: $this->permissionName);
         $HasPermissions = $UserPermissions->pluck('permission_id')->contains($PermissionId);
         return $HasPermissions;
     }
@@ -42,6 +59,6 @@ class HasPermission extends Component
         if (!$this->HasPermissions()) {
             return "";
         }
-        return view('components.has-permission');
+        return view(view: 'components.has-permission');
     }
 }
