@@ -24,8 +24,25 @@
                             type="password"
                             name="password"
                             required autocomplete="new-password" />
+            @php
+                $passErrorArray = $errors->get('password');
+            @endphp
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            @if (isset($passErrorArray[0]))
+                @if ($passErrorArray[0] == 'The password field confirmation does not match.')
+                    <x-input-error messages="De bevestiging van het wachtwoordveld komt niet overeen." class="mt-2"/>
+                @else
+                    <x-input-error messages="Het wachtwoordveld moet minimaal 8 tekens lang zijn." class="mt-2"/>
+                @endif
+
+                @if (isset($passErrorArray[1]))
+                    @if ($passErrorArray[1] == 'The password field confirmation does not match.')
+                        <x-input-error messages="De bevestiging van het wachtwoordveld komt niet overeen." class="mt-2"/>
+                    @else
+                        <x-input-error messages="Het wachtwoordveld moet minimaal 8 tekens lang zijn." class="mt-2"/>
+                    @endif
+                @endif
+            @endif
         </div>
 
         <!-- Confirm Password -->
@@ -35,13 +52,11 @@
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="ml-4">
-                {{ __('Register') }}
+                {{ __('Registreer') }}
             </x-primary-button>
         </div>
     </form>
