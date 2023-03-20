@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Update Password') }}
+            {{ __('Update wachtwoord') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
+            {{ /*__('Ensure your account is using a long, random password to stay secure.')*/ __('Zorg ervoor dat uw account een lang, willekeurige wachtwoord gebruikt om veilig te blijven.') }}
         </p>
     </header>
 
@@ -14,25 +14,45 @@
         @method('put')
 
         <div>
-            <x-input-label for="current_password" :value="__('Current Password')" />
+            <x-input-label for="current_password" :value="__('Huidige wachtwoord')" />
             <x-text-input id="current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+            @if ($errors->updatePassword->get('current_password'))
+                <x-input-error messages="Het wachtwoord is incorrect." class="mt-2" />
+            @endif
         </div>
 
         <div>
-            <x-input-label for="password" :value="__('New Password')" />
+            <x-input-label for="password" :value="__('Nieuwe wachtwoord')" />
             <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+            @php
+                $passErrorArray = $errors->updatePassword->get('password');
+            @endphp
+
+            @if (isset($passErrorArray[0]))
+                @if ($passErrorArray[0] == 'The password field confirmation does not match.')
+                    <x-input-error messages="De bevestiging van het wachtwoordveld komt niet overeen." class="mt-2"/>
+                @else
+                    <x-input-error messages="Het wachtwoordveld moet minimaal 8 tekens lang zijn." class="mt-2"/>
+                @endif
+
+                @if (isset($passErrorArray[1]))
+                    @if ($passErrorArray[1] == 'The password field confirmation does not match.')
+                        <x-input-error messages="De bevestiging van het wachtwoordveld komt niet overeen." class="mt-2"/>
+                    @else
+                        <x-input-error messages="Het wachtwoordveld moet minimaal 8 tekens lang zijn." class="mt-2"/>
+                    @endif
+                @endif
+            @endif
         </div>
 
         <div>
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
             <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+            <!--<x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />-->
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Opslaan') }}</x-primary-button>
 
             @if (session('status') === 'password-updated')
                 <p
@@ -41,7 +61,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Opgeslagen.') }}</p>
             @endif
         </div>
     </form>
