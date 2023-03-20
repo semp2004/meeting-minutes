@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table -> foreign('user_id') -> references('id') -> on('users');
-            $table -> foreign('permission_id') -> references('id') -> on('permissions');
+            $table -> foreign('permission_id') -> references('id') -> on('permissions') ->onDelete('cascade');
         });
     }
 
