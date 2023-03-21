@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class template extends Model
 {
     protected $table = 'templates';
-    protected $fillable = ['content', 'user_id'];
+    protected $fillable = ['user_id', 'name', 'header', 'points'];
 
 }

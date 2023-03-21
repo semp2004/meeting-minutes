@@ -12,13 +12,13 @@ return new class extends Migration {
 
             $table -> foreignId('user_id');
 
-            $table->longText('content');
-
-            $table -> foreign('user_id') -> references('id') -> on('users')->onDelete('cascade');
-
-
+            $table -> string('name');
+            $table -> longText('header');
+            $table -> longText('points');
 
             $table->timestamps();
+            
+            $table -> foreign('user_id') -> references('id') -> on('users')->onDelete('cascade') -> onUpdate('cascade');
         });
     }
 
