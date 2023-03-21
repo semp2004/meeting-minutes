@@ -16,7 +16,15 @@ class NewTemplateController extends Controller
     public function store(Request $request){
         $UserId = \Auth::id();
         $template = new template();
-        $template->content = $request->input('content');
+
+
+        $name = $request ->input('name');
+        $header = $request -> input('header');
+        $points = $request -> input('points');
+
+        $template -> name = $name;
+        $template -> header = $header;
+        $template -> points = $points;
         $template->user_id = $UserId;
         $template->save();
         return $template -> id;
