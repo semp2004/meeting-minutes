@@ -26,6 +26,9 @@
                                     <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Naam eigenaar</span>
                                 </th>
                                 <th class="bg-gray-800 px-6 py-3 bg-gray-700 text-left border-l border-l-gray-700">
+                                    <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Meeting aanpassen</span>
+                                </th>
+                                <th class="bg-gray-800 px-6 py-3 bg-gray-700 text-left border-l border-l-gray-700">
                                     <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Meeting bekijken</span>
                                 </th>
                             </tr>
@@ -44,20 +47,10 @@
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
                                     <p class="text-sm leading-5 text-white">[naam]</p>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
-                                    <form action="/meeting/1">
-                                        <x-primary-button>Bekijken</x-primary-button>
-                                    </form>
-                                </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-
-                    <div class="mt-2">
-                        <x-primary-button>Nieuwe meeting</x-primary-button>
-                    </div>
-
                 </div>
             </div>
         </div>

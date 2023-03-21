@@ -18,7 +18,7 @@ use App\Enums\Permission;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']) -> name('home-page');
 
 Route::get('/authenticated', [\App\Http\Controllers\Admin\NewTemplateController::class, 'index']);
 Route::post('/authenticated', [\App\Http\Controllers\Admin\NewTemplateController::class, 'store']);
@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/agenda', [AgendaController::class, 'index']);
+    Route::get('/meeting/{meeting}', [AgendaController::class, 'meeting']);
 });
 
 
