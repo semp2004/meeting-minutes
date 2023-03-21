@@ -42,24 +42,24 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('permission:'. Permission::AdminView ->name) -> group(function() {
 //  New template
-    Route::get('/admin/NewTemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'index']);
-    Route::post('/admin/NewTemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'store']);
+    Route::get('/admin/newtemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'index']);
+    Route::post('/admin/newtemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'store']);
 
 //  Edit template
-    Route::get('/admin/EditTemplates', [\App\Http\Controllers\Admin\EditTemplateController::class, 'index']);
-    Route::get('/admin/EditTemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'editTemplate'])->name('EditTemplate');
-    Route::post('/admin/EditTemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'store']);
+    Route::get('/admin/edittemplates', [\App\Http\Controllers\Admin\EditTemplateController::class, 'index']);
+    Route::get('/admin/edittemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'editTemplate'])->name('EditTemplate');
+    Route::post('/admin/edittemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'store']);
 
     Route::get('/admin/register', [RegisteredUserController::class, 'create']) -> middleware('permission:' . Permission::NewUser -> name)
         ->name('register');
     Route::post('/admin/register', [RegisteredUserController::class, 'store']) -> middleware('permission:' . Permission::NewUser -> name);
 
-    Route::get('/admin/EditUsers', [\App\Http\Controllers\Admin\EditUserController::class, 'index']) -> middleware('permission:' . Permission::EditUser -> name);
+    Route::get('/admin/editusers', [\App\Http\Controllers\Admin\EditUserController::class, 'index']) -> middleware('permission:' . Permission::EditUser -> name);
 
-    Route::get('/admin/EditUser/{id}', [\App\Http\Controllers\Admin\EditUserController::class, 'EditUser']) -> middleware('permission:' . Permission::EditUser -> name) ->name('EditUser');
+    Route::get('/admin/edituser/{id}', [\App\Http\Controllers\Admin\EditUserController::class, 'EditUser']) -> middleware('permission:' . Permission::EditUser -> name) ->name('EditUser');
 
-    Route::post('/admin/EditUser/{id}', [\App\Http\Controllers\Admin\EditUserController::class, 'EditUserRequest']) -> middleware('permission:' . Permission::EditUser -> name) ->name('EditUser');
+    Route::post('/admin/edituser/{id}', [\App\Http\Controllers\Admin\EditUserController::class, 'EditUserRequest']) -> middleware('permission:' . Permission::EditUser -> name) ->name('EditUser');
 
-    Route::get('/admin/DeleteUser/{id}', [\App\Http\Controllers\Admin\EditUserController::class, 'DeleteUser']) -> middleware('permission:' . Permission::DeleteUser -> name) ->name('DeleteUser');
+    Route::get('/admin/deleteuser/{id}', [\App\Http\Controllers\Admin\EditUserController::class, 'DeleteUser']) -> middleware('permission:' . Permission::DeleteUser -> name) ->name('DeleteUser');
 
 });
