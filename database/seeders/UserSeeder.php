@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        for ($i = 1; $i < count(\App\Enums\Permission::cases()); $i++) {
+        for ($i = 1; $i < count(\App\Enums\Permission::cases()) + 1; $i++) {
             UserPermission::query()
                 ->create([
                     'user_id' => $ExampleUser -> id,
