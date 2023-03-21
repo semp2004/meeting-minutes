@@ -12,5 +12,11 @@ class AgendaController extends Controller
 
         ]);
     }
+    public function meeting()
+    {
+        return view('meetings.meeting', [
+
+        ]);
+    }
 
 }
