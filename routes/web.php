@@ -45,7 +45,8 @@ Route::middleware('permission:'. Permission::AdminView ->name) -> group(function
     Route::post('/admin/NewTemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'store']);
 
 //  Edit template
-    Route::get('/admin/EditTemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'index']);
+    Route::get('/admin/EditTemplates', [\App\Http\Controllers\Admin\EditTemplateController::class, 'index']);
+    Route::get('/admin/EditTemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'editTemplate'])->name('EditTemplate');
     Route::post('/admin/EditTemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'store']);
 
     Route::get('/admin/register', [RegisteredUserController::class, 'create']) -> middleware('permission:' . Permission::NewUser -> name)
