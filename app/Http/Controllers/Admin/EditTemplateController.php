@@ -13,23 +13,26 @@ class EditTemplateController extends Controller
         $templates = template::all();
         return view('admin.templates.EditTemplates', ['templates' => $templates]);
     }
+
     public function editTemplate(int $id)
     {
-        $TemplateObject = template::where('id', $id) -> FirstOrFail();
+        $TemplateObject = template::where('id', $id)->FirstOrFail();
         return view('admin.templates.EditTemplate', ['Template' => $TemplateObject]);
     }
-    public function store(Request $request, int $id) {
-        $template = template::where('id', $id) -> FirstOrFail();
 
-        $name = $request ->input('name');
-        $header = $request -> input('header');
-        $points = $request -> input('points');
+    public function store(Request $request, int $id)
+    {
+        $template = template::query()->where('id', $id)->FirstOrFail();
 
-        $template -> name = $name | $template -> name;
-        $template -> header = $header | $template -> header;
-        $template -> points = $points | $template -> points;
+        $name = $request->input('name');
+        $header = $request->input('header');
+        $points = $request->input('points');
+
+        $template->name = $name ?? $template->name;
+        $template->header = $header ?? $template->header;
+        $template->points = $points ?? $template->points;
 
         $template->save();
-        return $template -> id;
+        return $template->id;
     }
 }
