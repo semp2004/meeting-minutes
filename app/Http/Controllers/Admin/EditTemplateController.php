@@ -8,12 +8,16 @@ use Illuminate\Http\Request;
 
 class EditTemplateController extends Controller
 {
-    public function index(int $id)
+    public function index()
+    {
+        $templates = template::all();
+        return view('admin.templates.EditTemplates', ['templates' => $templates]);
+    }
+    public function editTemplate(int $id)
     {
         $TemplateObject = template::where('id', $id) -> FirstOrFail();
         return view('admin.templates.EditTemplate', ['Template' => $TemplateObject]);
     }
-
     public function store(Request $request, int $id) {
         $template = template::where('id', $id) -> FirstOrFail();
 
