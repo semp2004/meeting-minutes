@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        (new UserSeeder())->run();
         (new PermissionSeeder())->run();
+        (new UserSeeder())->run();
     }
 }
