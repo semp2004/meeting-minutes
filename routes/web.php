@@ -56,7 +56,7 @@ Route::middleware('permission:'. Permission::AdminView ->name) -> group(function
 
     Route::get('/admin/editusers', [\App\Http\Controllers\Admin\EditUserController::class, 'index']) -> middleware('permission:' . Permission::EditUser -> name)->name('EditUsers');
 
-    Route::get('/admin/edituser/{id}', [\App\Http\Controllers\Admin\EditUserController::class, 'EditUser']) -> middleware('permission:' . Permission::EditUser -> name) ->name('EditUser');
+    Route::get('/admin/edituser/{id}', [\App\Http\Controllers\Admin\EditUserController::class, 'EditUser']) -> middleware('permission:' . Permission::EditUser -> name);
 
     Route::post('/admin/edituser/{id}', [\App\Http\Controllers\Admin\EditUserController::class, 'EditUserRequest']) -> middleware('permission:' . Permission::EditUser -> name) ->name('EditUser');
 
