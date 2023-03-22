@@ -17,7 +17,7 @@ class EditTemplateController extends Controller
     public function editTemplate(int $id)
     {
         $TemplateObject = template::where('id', $id)->FirstOrFail();
-        return view('admin.templates.EditTemplate', ['Template' => $TemplateObject]);
+        return view(view: 'admin.templates.EditTemplate', data: ['Template' => $TemplateObject]);
     }
 
     public function store(Request $request, int $id)
@@ -41,6 +41,6 @@ class EditTemplateController extends Controller
 
         // Save model
         $template->save();
-        return $template->id;
+        return $this ->index();
     }
 }
