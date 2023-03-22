@@ -15,6 +15,36 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ Auth::user() ? __('Dashboard') : __('Log in') }}
                     </x-nav-link>
+
+                    @if (Auth::user())
+                        <x-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+                            {{ __('Agenda') }}
+                        </x-nav-link>
+                    @endif
+
+                    <x-has-permission permission-name="{{\App\Enums\Permission::EditUser->name}}">
+                        <x-nav-link :href="route('EditUsers')" :active="request()->routeIs('EditUsers')">
+                            {{ __('Medewerkers aanpassen') }}
+                        </x-nav-link>
+                    </x-has-permission>
+
+                    <x-has-permission permission-name="{{\App\Enums\Permission::NewUser->name}}">
+                        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                            {{ __('Medewerkers registreren') }}
+                        </x-nav-link>
+                    </x-has-permission>
+
+                    <x-has-permission permission-name="{{\App\Enums\Permission::NewTemplate->name}}">
+                        <x-nav-link :href="route('NewTemplate')" :active="request()->routeIs('NewTemplate')">
+                            {{ __('Template toevoegen') }}
+                        </x-nav-link>
+                    </x-has-permission>
+
+                    <x-has-permission permission-name="{{\App\Enums\Permission::EditTemplate->name}}">
+                        <x-nav-link :href="route('EditTemplates')" :active="request()->routeIs('EditTemplates')">
+                            {{ __('Templates aanpassen') }}
+                        </x-nav-link>
+                    </x-has-permission>
                 </div>
             </div>
 
