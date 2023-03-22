@@ -35,18 +35,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/agenda', [AgendaController::class, 'index']);
+    Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
     Route::get('/meeting/{meeting}', [AgendaController::class, 'meeting']);
 });
 
 
 Route::middleware('permission:'. Permission::AdminView ->name) -> group(function() {
 //  New template
-    Route::get('/admin/newtemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'index']);
+    Route::get('/admin/newtemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'index'])->name('NewTemplate');
     Route::post('/admin/newtemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'store']);
 
 //  Edit template
-    Route::get('/admin/edittemplates', [\App\Http\Controllers\Admin\EditTemplateController::class, 'index']);
+    Route::get('/admin/edittemplates', [\App\Http\Controllers\Admin\EditTemplateController::class, 'index'])->name('EditTemplates');
     Route::get('/admin/edittemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'editTemplate'])->name('EditTemplate');
     Route::post('/admin/edittemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'store']);
 
@@ -54,7 +54,7 @@ Route::middleware('permission:'. Permission::AdminView ->name) -> group(function
         ->name('register');
     Route::post('/admin/register', [RegisteredUserController::class, 'store']) -> middleware('permission:' . Permission::NewUser -> name);
 
-    Route::get('/admin/editusers', [\App\Http\Controllers\Admin\EditUserController::class, 'index']) -> middleware('permission:' . Permission::EditUser -> name);
+    Route::get('/admin/editusers', [\App\Http\Controllers\Admin\EditUserController::class, 'index']) -> middleware('permission:' . Permission::EditUser -> name)->name('EditUsers');
 
     Route::get('/admin/edituser/{id}', [\App\Http\Controllers\Admin\EditUserController::class, 'EditUser']) -> middleware('permission:' . Permission::EditUser -> name) ->name('EditUser');
 
