@@ -19,7 +19,7 @@
 
                     <td class="grid grid-cols-1">
                         <form method="get" action="{{route('EditTemplate', ['id' => $template->id])}}">
-                            <x-secondary-button type="submit">Aanpassen</x-secondary-button>
+                            <x-secondary-button type="submit"><i class="fa-solid fa-pencil"></i> Aanpassen</x-secondary-button>
                         </form>
                     </td>
                 </tr>
