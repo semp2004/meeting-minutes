@@ -1,12 +1,15 @@
 @extends('layouts.app')
 
 @section('header')
-    <h1 class="mt-4 mb-6">Templates aanpassen</h1>
+    <h2>
+        <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Templates aanpassen</h1>
+    </h2>
 @endsection
 
+
 @section('content')
-    <div class="bg-gray-800 rounded pt-6 pb-8 mb-4 ml-20 mr-20">
-        <table class="text-center text-gray-100 w-full">
+    <div class="bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-100 rounded pt-6 pb-8 mb-4 ml-20 mr-20">
+        <table class="text-center w-full">
             <tr>
                 <th>Naam</th>
                 <th>Agenda punten</th>
