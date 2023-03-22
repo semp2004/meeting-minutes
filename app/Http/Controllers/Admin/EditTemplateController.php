@@ -30,20 +30,14 @@ class EditTemplateController extends Controller
         $points = $request->input('points');
 
         // Check if variables are null
-        if ($name == null) {
-            return abort(400);
-        }
-        if ($header == null) {
-            return abort(400);
-        }
-        if ($points == null) {
-            return abort(400);
-        }
+        if ($name == null) return abort(400);
+        if ($header == null) return abort(400);
+        if ($points == null) return abort(400);
 
         // Update template model
-        $template->name = $name ?? $template->name;
-        $template->header = $header ?? $template->header;
-        $template->points = $points ?? $template->points;
+        $template->name = $name;
+        $template->header = $header;
+        $template->points = $points;
 
         // Save model
         $template->save();
