@@ -32,7 +32,7 @@ class EditTemplateController extends Controller
         // Check if variables are null
         if ($name == null) {
             return abort(400);
-        };
+        }
         if ($header == null) {
             return abort(400);
         }
@@ -41,9 +41,9 @@ class EditTemplateController extends Controller
         }
 
         // Update template model
-        $template->name = $name | $template->name;
-        $template->header = $header | $template->header;
-        $template->points = $points | $template->points;
+        $template->name = $name ?? $template->name;
+        $template->header = $header ?? $template->header;
+        $template->points = $points ?? $template->points;
 
         // Save model
         $template->save();
