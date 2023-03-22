@@ -23,7 +23,7 @@
         </div>
 
         <br/>
-        <x-secondary-button type="submit">Opslaan</x-secondary-button>
+        <x-secondary-button type="submit"><i class="fa-solid fa-pen-to-square fa-beat"></i> Opslaan</x-secondary-button>
 
     </form>
 @endsection

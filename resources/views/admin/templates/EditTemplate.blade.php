@@ -6,8 +6,8 @@
 ]])
 
 @section('submit_button')
-    <x-secondary-button class="ml" onclick="submit()">
-        {{ __('Opslaan') }}
+    <x-secondary-button class="ml">
+        <i class="fa-solid fa-eraser"></i> Aanpassen
     </x-secondary-button>
 @endsection
 

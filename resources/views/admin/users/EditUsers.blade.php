@@ -24,11 +24,11 @@
 
                     <td class="grid grid-cols-2">
                         <form method="get" action="{{route('EditUser', ['id' => $user -> id])}}">
-                            <x-secondary-button type="submit">Aanpassen</x-secondary-button>
+                            <x-secondary-button type="submit"><i class="fa-solid fa-pen-to-square"></i> Aanpassen</x-secondary-button>
                         </form>
 
                         <form method="get" action="{{route('DeleteUser', ['id' => $user -> id])}}">
-                            <x-secondary-button type="submit">Verwijderen</x-secondary-button>
+                            <x-secondary-button type="submit"><i class="fa-solid fa-eraser"></i> Verwijderen</x-secondary-button>
                         </form>
 
                     </td>
