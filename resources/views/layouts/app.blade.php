@@ -26,7 +26,7 @@
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            <div class="text-gray-100 text-center text-xl">
+            <div class="text-center text-xl">
                 @yield('header')
             </div>
 

@@ -3,9 +3,10 @@
 
 
 @section('header')
-    <h1>Gebruikers aanpassen</h1>
+    <h2>
+        <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Gebruikers aanpassen</h1>
+    </h2>
 @endsection
-
 
 
 @section('content')
