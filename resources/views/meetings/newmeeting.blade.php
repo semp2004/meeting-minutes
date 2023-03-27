@@ -23,52 +23,43 @@
                                     <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">datum meeting</span>
                                 </th>
                                 <th class="bg-gray-800 px-6 py-3 bg-gray-700 text-left border-l border-l-gray-700">
-                                    <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Naam eigenaar</span>
-                                </th>
-                                <th class="bg-gray-800 px-6 py-3 bg-gray-700 text-left border-l border-l-gray-700">
-                                    <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Meeting bekijken</span>
+                                    <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Deelnemers</span>
                                 </th>
                             </tr>
                             </thead>
-
                             <tbody class="bg-gray-800 divide-y divide-gray-700">
-
-
-                            @foreach($meetings as $meeting)
-
-                                <tr>
+                            <tr>
+                                <form method="post" action="{{ route('meeting.store') }}">
+                                    @csrf
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white">
-                                        <p class="text-sm leading-5 text-white">{{$meeting->name}}</p>
+                                        <p class="text-sm leading-5 text-white">
+                                            <x-text-input type="text" name="name" id="meetingname"
+                                                          placeholder="Naam van meeting" class="w-full" required/>
+                                        </p>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
-                                        <p class="text-sm leading-5 text-white">{{$meeting->planned_time}}</p>
+                                        <p class="text-sm leading-5 text-white">
+                                            <x-text-input type="datetime-local" name="planned_time" id="meetingdate"
+                                                          placeholder="Datum van meeting" class="w-full" required/>
+                                        </p>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
-                                        <p class="text-sm leading-5 text-white">{{$meeting->user->name}}</p>
+                                        <select name="meeting_participants" id="meetingparticipants" class="w-full bg-gray-900 px-6 py-3 border-l border-l-gray-700">
+                                            @foreach($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700 text-center">
-                                        <form action="/meeting/{{$meeting->id}}">
-                                            <x-secondary-button onclick="submit()">Bekijken</x-secondary-button>
-                                        </form>
-                                    </td>
-
-
-                                </tr>
-                            @endforeach
-
+                            </tr>
                             </tbody>
                         </table>
                     </div>
-
-                    <br>
-
                     <div class="mt-2 flex justify-center">
-                        <form action="/meeting/new">
-                            <x-secondary-button class="items-center" onclick="submit()">Nieuwe meeting</x-secondary-button>
+                        <x-secondary-button class="items-center" onclick="submit()">Nieuwe meeting</x-secondary-button>
                         </form>
+
                     </div>
-
-
+                    <br>
                 </div>
             </div>
         </div>

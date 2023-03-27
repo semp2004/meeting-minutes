@@ -14,5 +14,11 @@ class Meeting extends Model
         'user_id',
         'template_id',
         'planned_time',
+        'meeting_participants'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
