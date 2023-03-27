@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //agenda and meetings
-    Route::get('/agenda', [AgendaController::class, 'index']);
+    Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
     Route::get('/meeting/new', [AgendaController::class, 'newmeeting']);
     Route::post('/meeting/store', [AgendaController::class, 'store'])->name('meeting.store');
     Route::get('/meeting/{meeting}', [AgendaController::class, 'meeting']);
