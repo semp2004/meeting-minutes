@@ -32,10 +32,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    //profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
+
+    //agenda and meetings
+    Route::get('/agenda', [AgendaController::class, 'index']);
+    Route::get('/meeting/new', [AgendaController::class, 'newmeeting']);
+    Route::post('/meeting/store', [AgendaController::class, 'store'])->name('meeting.store');
     Route::get('/meeting/{meeting}', [AgendaController::class, 'meeting']);
 });
 
