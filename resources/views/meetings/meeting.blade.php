@@ -28,9 +28,6 @@
                                 <th class="bg-gray-800 px-6 py-3 bg-gray-700 text-left border-l border-l-gray-700">
                                     <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Meeting aanpassen</span>
                                 </th>
-                                <th class="bg-gray-800 px-6 py-3 bg-gray-700 text-left border-l border-l-gray-700">
-                                    <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Meeting bekijken</span>
-                                </th>
                             </tr>
                             </thead>
 
@@ -39,13 +36,18 @@
 
                             <tr>
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white">
-                                    <p class="text-sm leading-5 text-white">[naam meeting]</p>
+                                    <p class="text-sm leading-5 text-white">{{$meeting->name}}</p>
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
-                                    <p class="text-sm leading-5 text-white">[datum]</p>
+                                    <p class="text-sm leading-5 text-white">{{$meeting->planned_time}}</p>
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
-                                    <p class="text-sm leading-5 text-white">[naam]</p>
+                                    <p class="text-sm leading-5 text-white">{{$meeting->user->name}}</p>
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
+                                    <form action="/meeting/{{$meeting->id}}">
+                                        <x-secondary-button onclick="submit()">Aanpassen</x-secondary-button>
+                                    </form>
                                 </td>
                             </tr>
                             </tbody>
