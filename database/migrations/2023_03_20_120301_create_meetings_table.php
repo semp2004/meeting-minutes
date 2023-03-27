@@ -16,8 +16,6 @@ return new class extends Migration {
             $table->foreignId('template_id')->nullable()->constrained();
             $table->timestamp('planned_time');
 
-            $table->string('meeting_participants')->nullable();
-
             $table->timestamps();
         });
     }
