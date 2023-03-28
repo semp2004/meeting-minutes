@@ -12,8 +12,8 @@ return new class extends Migration {
 
             $table->string('name');
 
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('template_id')->nullable()->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('template_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamp('planned_time');
 
             $table->string('meeting_participants')->nullable();
