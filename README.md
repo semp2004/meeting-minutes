@@ -17,6 +17,6 @@
 
 [Tailwind Docs](https://tailwindcss.com/)
 
-[Trix editor](https://github.com/basecamp/trix)
+[Fontawesome Iconen](https://fontawesome.com/)
 
-[Sweetalert](https://sweetalert.js.org/guides/)
+[Sweetalert Notificaties](https://sweetalert.js.org/guides/)

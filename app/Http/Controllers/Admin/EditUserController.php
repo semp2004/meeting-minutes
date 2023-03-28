@@ -10,13 +10,13 @@ class EditUserController extends Controller
     public function index()
     {
         $Users = User::get();
-        return view('admin.users.EditUsers', ['users' => $Users]);
+        return view(view: 'admin.users.EditUsers', data: ['users' => $Users]);
     }
 
     public function EditUser($id)
     {
         $User = User::where('id', $id)->FirstOrFail();
-        return view('admin.users.EditUser', ['user' => $User]);
+        return view(view: 'admin.users.EditUser', data: ['user' => $User]);
     }
 
     public function EditUserRequest(int $id)
@@ -30,24 +30,13 @@ class EditUserController extends Controller
         $UserModel ->save();
 
 
-        return [
-            'status' => 200,
-            'username' => $Name,
-            'email' => $Email,
-            'id' => $id
-        ];
+        return $this->index();
     }
 
     public function DeleteUser(int $id) {
         $UserModel = User::where('id', $id) -> first();
         $UserModel -> delete();
-
-        return [
-            'status' => 200,
-            'username' => $UserModel -> name,
-            'email' => $UserModel -> email,
-            'id' => $id
-        ];
+        return $this->index();
     }
 
 }

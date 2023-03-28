@@ -3,9 +3,10 @@
 
 
 @section('header')
-    <h1>Gebruikers aanpassen</h1>
+    <h2>
+        <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Gebruikers aanpassen</h1>
+    </h2>
 @endsection
-
 
 
 @section('content')
@@ -23,7 +24,7 @@
         </div>
 
         <br/>
-        <x-secondary-button type="submit">Opslaan</x-secondary-button>
+        <x-secondary-button type="submit"><i class="fa-solid fa-pen-to-square fa-beat"></i> Opslaan</x-secondary-button>
 
     </form>
 @endsection

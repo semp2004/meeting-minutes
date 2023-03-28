@@ -2,12 +2,14 @@
 
 
 @section('submit_button')
-    <button class="bg-gray-800 border-t-green-500 border-t-2 text-gray-100 w-full h-12 absolute bottom-0 left-0" onclick="submit()">Opslaan</button>
+    <x-secondary-button class="ml">
+        <i class="fa-solid fa-pen-to-square"></i> Opslaan
+    </x-secondary-button>
 @endsection
 
 @section('header')
-    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-        <h1>Maak template</h1>
+    <h2>
+        <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Maak template</h1>
     </h2>
 @endsection
 
@@ -28,17 +30,26 @@
 @endphp
 
 @section('content')
-    <form method="post" class="mt-4">
+    <form class="mt-10 ml-96 mr-96 text-xl" method="post" class="mt-4">
         @csrf
-        <x-input-label for="name" class="w-full text-center text-xl">Naam</x-input-label>
-        <x-text-input class="w-full text-center" name="name" placeholder="Template #1"></x-text-input>
+        <div class="dark:bg-gray-800 dark:text-gray-200 bg-gray-200 text-gray-800  rounded px-16 pt-6 pb-8 mb-4 ml-40 mr-40">
+            <div class="mb-4">
+                <x-input-label for="name" class="w-full pl-0.5">Naam</x-input-label>
+                <x-text-input class="block w-full mt-1 pl-2" name="name" placeholder="Template #1"></x-text-input>
+            </div>
+            <div class="mb-4">
+                <x-input-label for="header" class="w-full pl-0.5">Bovenste gegevens</x-input-label>
+                <x-text-input class="w-full pl-2" name="header"
+                              placeholder="Deze vergadering is voor de bespreking van de cijfers"></x-text-input>
+            </div>
+            <div class="mb-4">
+                <x-input-label for="points" class="w-full pl-0.5">Agenda punten</x-input-label>
+                <x-text-input class="w-full pl-2" name="points"
+                              placeholder="{{$RandomPoint}}"></x-text-input>
 
-        <x-input-label for="header" class="w-full text-center text-xl">Bovenste gegevens</x-input-label>
-        <x-text-input class="w-full text-center" name="header" placeholder="Deze vergadering is voor de bespreking van de cijfers"></x-text-input>
+            </div>
 
-        <x-input-label for="points" class="w-full text-center text-xl">Agenda punten</x-input-label>
-        <x-text-input class="w-full text-center" name="points" placeholder="{{$RandomPoint}}"></x-text-input>
-
-        @yield('submit_button')
+            @yield('submit_button')
+        </div>
     </form>
 @endsection

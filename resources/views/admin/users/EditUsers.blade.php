@@ -3,14 +3,16 @@
 
 
 @section('header')
-    <h1 class="mt-4 mb-6">Gebruikers aanpassen</h1>
+    <h2>
+        <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Gebruikers aanpassen</h1>
+    </h2>
 @endsection
 
 
 
 @section('content')
-    <div class="bg-gray-800 rounded pt-6 pb-8 mb-4 ml-20 mr-20">
-        <table class="text-center text-gray-100 w-full">
+    <div class="dark:bg-gray-800 dark:text-gray-200 text-gray-800 bg-gray-200 rounded pt-6 pb-8 mb-4 ml-20 mr-20">
+        <table class="text-center w-full">
             <tr>
                 <th>Naam</th>
                 <th>Email</th>
@@ -24,11 +26,11 @@
 
                     <td class="grid grid-cols-2">
                         <form method="get" action="{{route('EditUser', ['id' => $user -> id])}}">
-                            <x-secondary-button type="submit">Aanpassen</x-secondary-button>
+                            <x-secondary-button type="submit"><i class="fa-solid fa-pen-to-square"></i> Aanpassen</x-secondary-button>
                         </form>
 
                         <form method="get" action="{{route('DeleteUser', ['id' => $user -> id])}}">
-                            <x-secondary-button type="submit">Verwijderen</x-secondary-button>
+                            <x-secondary-button type="submit"><i class="fa-solid fa-eraser"></i> Verwijderen</x-secondary-button>
                         </form>
 
                     </td>

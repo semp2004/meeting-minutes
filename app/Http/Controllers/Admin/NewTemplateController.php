@@ -27,6 +27,7 @@ class NewTemplateController extends Controller
         $template -> points = $points;
         $template->user_id = $UserId;
         $template->save();
-        return $template -> id;
+
+        return to_route('EditTemplates');
     }
 }
