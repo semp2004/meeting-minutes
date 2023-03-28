@@ -8,6 +8,7 @@
     </x-slot>
     {{--naam meeting, datum meeting, naam van eigenaar van meeting--}}
     {{--knop aanpassen, nieuwe meeting knop--}}
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -26,7 +27,7 @@
                                     <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Naam eigenaar</span>
                                 </th>
                                 <th class="bg-gray-800 px-6 py-3 bg-gray-700 text-left border-l border-l-gray-700">
-                                    <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Meeting aanpassen</span>
+                                    <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Meeting deelnemers</span>
                                 </th>
                             </tr>
                             </thead>
@@ -44,6 +45,14 @@
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
                                     <p class="text-sm leading-5 text-white">{{$meeting->user->name}}</p>
                                 </td>
+                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
+                                    <p class="text-sm leading-5 text-white">
+                                        @foreach($persons as $person)
+                                            {{$person->name}},
+                                        @endforeach
+                                    </p>
+                                </td>
+                                <td ></td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
                                     <form action="/meeting/{{$meeting->id}}">
                                         <x-secondary-button onclick="submit()">Aanpassen</x-secondary-button>

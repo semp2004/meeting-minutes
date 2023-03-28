@@ -56,9 +56,6 @@
                                             </label>
                                             @endforeach
                                         </div>
-{{--                                        <select name="meeting_participants" id="meetingparticipants" class="w-full bg-gray-900 px-6 py-3 border-l border-l-gray-700">
-                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                        </select>--}}
                                     </td>
                             </tr>
                             </tbody>

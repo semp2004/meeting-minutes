@@ -21,8 +21,10 @@ class AgendaController extends Controller
 
     public function meeting(Meeting $Meeting)
     {
+        $persons = $Meeting ->persons();
         return view('meetings.meeting', [
-            'meeting' => $Meeting
+            'meeting' => $Meeting,
+            'persons' => $persons,
         ]);
     }
 
@@ -43,16 +45,9 @@ class AgendaController extends Controller
             'meeting_participants' => 'required|array|max:255',
         ]);
 
-//        foreach ($request->meeting_participants as $meeting_participant)
-//            echo $meeting_participant;
-
         $agenda = new Meeting();
         $agenda->name = $data['name'];
         $agenda->planned_time = $data['planned_time'];
-//        foreach ($request->meeting_participants as $meeting_participant) {
- //           $agenda->meeting_participants = $meeting_participant;
-   //     }
-//        $agenda->meeting_participants = $data['meeting_participants'];
 
         $agenda->user_id = auth()->user()->id;
         $agenda->save();
