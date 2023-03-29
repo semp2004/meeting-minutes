@@ -56,9 +56,6 @@ class HasPermission extends Component
      */
     public function render(): View|Closure|string
     {
-        if (!$this->HasPermissions()) {
-            return "";
-        }
-        return view(view: 'components.has-permission');
+        return $this->HasPermissions() ? view(view: 'components.has-permission') : "";
     }
 }
