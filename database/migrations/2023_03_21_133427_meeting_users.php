@@ -12,8 +12,8 @@ return new class extends Migration {
             $table ->foreignId('meeting_id');
 
 
-            $table -> foreign('user_id') -> references('id') -> on('users');
-            $table -> foreign('meeting_id') -> references('id') -> on('meetings');
+            $table -> foreign('user_id') -> references('id') -> on('users')->onDelete('cascade');
+            $table -> foreign('meeting_id') -> references('id') -> on('meetings')->onDelete('cascade');
 
         });
     }

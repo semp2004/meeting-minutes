@@ -43,12 +43,19 @@
                                                           placeholder="Datum van meeting" class="w-full" required/>
                                         </p>
                                     </td>
+
+{{--                                    --}}
+
+{{--                                    --}}
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
-                                        <select name="meeting_participants" id="meetingparticipants" class="w-full bg-gray-900 px-6 py-3 border-l border-l-gray-700">
+                                        <div id="checkboxes" class="w-72 h-20 overflow-y-scroll overflow-x-hidden border border-gray-300">
                                             @foreach($users as $user)
-                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            <label for="meetingparticipants" class="block py-2 cursor-pointer hover:bg-blue-500">
+                                                <input name="meeting_participants[]" type="checkbox" id="meetingparticipants" class="inline-block align-middle mr-2" value="{{ $user->id }}"/>
+                                                <span class="inline-block align-middle">{{ $user->name }}</span>
+                                            </label>
                                             @endforeach
-                                        </select>
+                                        </div>
                                     </td>
                             </tr>
                             </tbody>

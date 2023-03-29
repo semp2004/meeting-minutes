@@ -21,4 +21,17 @@ class Meeting extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function persons()
+    {
+        $data = \DB::table('user_meetings')
+            ->join('users', 'user_meetings.user_id', '=', 'users.id')
+            ->select('users.name')
+            ->where('user_meetings.meeting_id', $this->id)
+            ->get()
+            ->toArray();
+
+        return $data;
+    }
+
 }
