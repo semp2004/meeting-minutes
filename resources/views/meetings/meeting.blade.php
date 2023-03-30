@@ -10,8 +10,8 @@
     {{--knop aanpassen, nieuwe meeting knop--}}
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-100">
-            <div class=" overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 text-gray-800 dark:text-gray-100">
+            <div class=" overflow-hidden shadow-sm sm:rounded-lg bg-gray-200 dark:bg-gray-800">
                 <div class="overflow-hidden overflow-x-auto p-6 ">
                     <div class="min-w-full align-middle">
                         <table class="min-w-full border border-gray-600 divide-y divide-gray-600">
