@@ -25,6 +25,7 @@ class AgendaController extends Controller
         return view('meetings.meeting', [
             'meeting' => $Meeting,
             'persons' => $persons,
+            'agendaItems' => $Meeting->agendaItems(),
         ]);
     }
 
