@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AgendaItemController;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/meeting/new', [AgendaController::class, 'newmeeting']);
     Route::post('/meeting/store', [AgendaController::class, 'store'])->name('meeting.store');
     Route::get('/meeting/{meeting}', [AgendaController::class, 'meeting']);
+
+    //agenda items
+    Route::post('/meeting/agenda-item', [AgendaItemController::class, 'store']);
 });
 
 
