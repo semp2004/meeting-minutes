@@ -96,4 +96,10 @@ class AgendaController extends Controller
         return redirect('/agenda')->with('success', 'Meeting is aangepast!');
     }
 
+    public function delete(Meeting $Meeting)
+    {
+        $Meeting->delete();
+        return redirect('/agenda')->with('success', 'Meeting is verwijderd!');
+    }
+
 }
