@@ -54,12 +54,22 @@
                                         @endforeach
                                     </p>
                                 </td>
-                                <td></td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
-                                    <form action="/meeting/{{$meeting->id}}">
-                                        <x-secondary-button onclick="submit()">Aanpassen</x-secondary-button>
-                                    </form>
-                                </td>
+                                @if($meeting->user_id == Auth::user()->id)
+
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
+                                        <form action="/meeting/edit/{{$meeting->id}}">
+                                            <x-secondary-button onclick="submit()">Aanpassen</x-secondary-button>
+                                        </form>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
+                                        <form action="/meeting/delete/{{$meeting->id}}">
+                                            <x-secondary-button onclick="submit()">Verwijderen</x-secondary-button>
+                                        </form>
+                                    </td>
+
+                                @endif
+
                             </tr>
                             </tbody>
                         </table>

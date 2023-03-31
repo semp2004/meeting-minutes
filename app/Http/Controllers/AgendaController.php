@@ -21,7 +21,7 @@ class AgendaController extends Controller
 
     public function meeting(Meeting $Meeting)
     {
-        $persons = $Meeting ->persons();
+        $persons = $Meeting->persons;
         return view('meetings.meeting', [
             'meeting' => $Meeting,
             'persons' => $persons,
@@ -32,8 +32,18 @@ class AgendaController extends Controller
     public function newmeeting()
     {
 
-        return view('meetings.newmeeting', [
+        return view('meetings.newMeeting', [
             'users' => User::get(),
+        ]);
+    }
+
+    public function editmeeting(Meeting $Meeting)
+    {
+        $persons = $Meeting->persons;
+        return view('meetings.editMeeting', [
+            'users' => User::get(),
+            'meeting' => $Meeting,
+            'persons' => $persons,
         ]);
     }
 
@@ -62,6 +72,28 @@ class AgendaController extends Controller
 
         return redirect('/agenda')->with('success', 'Meeting is toegevoegd!');
 
+    }
+    public function update(Request $request, Meeting $Meeting)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'planned_time' => 'required|date',
+            'meeting_participants' => 'required|array|max:255',
+        ]);
+
+        $Meeting->name = $data['name'];
+        $Meeting->planned_time = $data['planned_time'];
+        $Meeting->save();
+
+        $Meeting->persons()->detach();
+        foreach ($request->meeting_participants as $meeting_participant) {
+            $mp = new MeetingParticipants();
+            $mp->meeting_id = $Meeting->id;
+            $mp->user_id = $meeting_participant;
+            $mp->save();
+        }
+
+        return redirect('/agenda')->with('success', 'Meeting is aangepast!');
     }
 
 }
