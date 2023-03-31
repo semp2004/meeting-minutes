@@ -16,6 +16,9 @@ class Meeting extends Model
         'planned_time',
         'meeting_participants'
     ];
+    protected $casts = [
+        'planned_time' => 'datetime:Y-m-d h:i:s',
+    ];
 
     public function user()
     {
@@ -24,14 +27,7 @@ class Meeting extends Model
 
     public function persons()
     {
-        $data = \DB::table('user_meetings')
-            ->join('users', 'user_meetings.user_id', '=', 'users.id')
-            ->select('users.name')
-            ->where('user_meetings.meeting_id', $this->id)
-            ->get()
-            ->toArray();
-
-        return $data;
+        return $this->belongsToMany(User::class, 'user_meetings', 'meeting_id', 'user_id');
     }
     public function agendaItems()
     {
