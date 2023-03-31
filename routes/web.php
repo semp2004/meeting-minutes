@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/meeting/edit/{meeting}', [AgendaController::class, 'editmeeting']);
     Route::post('/meeting/store', [AgendaController::class, 'store'])->name('meeting.store');
     Route::post('/meeting/update/{meeting}', [AgendaController::class, 'update'])->name('meeting.update');
+    Route::post('/meeting/delete/{meeting}', [AgendaController::class, 'delete'])->name('meeting.delete');
     Route::get('/meeting/{meeting}', [AgendaController::class, 'meeting']);
 
     //agenda items
