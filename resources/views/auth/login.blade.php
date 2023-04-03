@@ -14,11 +14,11 @@
     <section class="bg-white dark:bg-gray-900">
         <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
             <section
-                class="relative flex h-32 bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6"
+                class="relative flex h-32 lg:col-span-5 lg:h-full xl:col-span-6"
             >
                 <img
                     alt="Meeting"
-                    src="https://images.unsplash.com/photo-1554415707-c1426270e0da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                    src="{{url('assets/login.png')}}"
                     class="absolute inset-0 h-full w-full object-cover opacity-80"
                 />
 
