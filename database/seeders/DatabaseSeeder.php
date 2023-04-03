@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
     {
         (new PermissionSeeder())->run();
         (new UserSeeder())->run();
+        (new TemplateSeeder()) -> run();
     }
 }

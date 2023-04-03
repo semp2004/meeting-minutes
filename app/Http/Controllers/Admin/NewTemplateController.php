@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\template;
+use App\Models\Template;
 use Illuminate\Http\Request;
 
 class NewTemplateController extends Controller
@@ -15,7 +15,7 @@ class NewTemplateController extends Controller
 
     public function store(Request $request){
         $UserId = \Auth::id();
-        $template = new template();
+        $template = new Template();
 
 
         $name = $request ->input('name');

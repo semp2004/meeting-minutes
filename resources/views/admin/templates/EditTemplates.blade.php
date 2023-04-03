@@ -15,13 +15,13 @@
                 <th>Agenda punten</th>
             </tr>
 
-            @foreach($templates as $template)
+            @foreach($templates as $Template)
                 <tr>
-                    <td>{{$template->name}}</td>
-                    <td>{{$template->points}}</td>
+                    <td>{{$Template->name}}</td>
+                    <td>{{$Template->points}}</td>
 
                     <td class="grid grid-cols-1">
-                        <form method="get" action="{{route('EditTemplate', ['id' => $template->id])}}">
+                        <form method="get" action="{{route('EditTemplate', ['id' => $Template->id])}}">
                             <x-secondary-button type="submit"><i class="fa-solid fa-pencil"></i> Aanpassen</x-secondary-button>
                         </form>
                     </td>

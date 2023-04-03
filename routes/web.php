@@ -53,11 +53,11 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('permission:'. Permission::AdminView ->name) -> group(function() {
-//  New template
+//  New Template
     Route::get('/admin/newtemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'index'])->name('NewTemplate');
     Route::post('/admin/newtemplate', [\App\Http\Controllers\Admin\NewTemplateController::class, 'store']);
 
-//  Edit template
+//  Edit Template
     Route::get('/admin/edittemplates', [\App\Http\Controllers\Admin\EditTemplateController::class, 'index'])->name('EditTemplates');
     Route::get('/admin/edittemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'editTemplate'])->name('EditTemplate');
     Route::post('/admin/edittemplate/{id}', [\App\Http\Controllers\Admin\EditTemplateController::class, 'store']);

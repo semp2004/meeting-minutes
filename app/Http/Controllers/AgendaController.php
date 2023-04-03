@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Meeting;
 use App\Models\MeetingParticipants;
-use App\Models\template;
+use App\Models\Template;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Agenda;
