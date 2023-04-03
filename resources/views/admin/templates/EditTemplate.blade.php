@@ -35,8 +35,8 @@
             </div>
             <div class="mb-4">
                 <x-input-label for="points" class="w-full pl-0.5">Agenda punten</x-input-label>
-                <x-text-input class="w-full pl-2" name="points"
-                              placeholder="Teveel leerlingen eten aan tafel" value="{{$Template->points}}"></x-text-input>
+                <x-textarea class="w-full pl-2" name="points"
+                              placeholder="Teveel leerlingen eten aan tafel" value="{{$Template->points}}"></x-textarea>
 
             </div>
 
