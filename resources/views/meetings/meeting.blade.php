@@ -63,7 +63,8 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
-                                        <form action="/meeting/delete/{{$meeting->id}}">
+                                        <form method="post" action="{{route('meeting.delete', $meeting->id)}}">
+                                            @csrf
                                             <x-secondary-button onclick="submit()">Verwijderen</x-secondary-button>
                                         </form>
                                     </td>
