@@ -134,7 +134,17 @@
                             @endif
                         </span>
                     </div>
+                    @if($agendaItem->user_id == Auth::user()->id)
+                        <a href="/agenda-item/{{ $agendaItem->id }}">
+                            <x-secondary-button><i class="fa-solid fa-pen-to-square"></i> Aanpassen
+                            </x-secondary-button>
+                        </a>
+                    @endif
                 @endforeach
+                <div>
+                    <textarea
+                        class="dark:bg-gray-800 bg-gray-200 dark:text-gray-200 text-gray-800 border-gray-700 border-[1px] focus:outline-none focus:border-gray-400 resize-none pl-4 pr-4 rounded-lg w-full whitespace-pre-wrap whitespace-pre-wrap"></textarea>
+                </div>
             </div>
         </div>
     </div>
