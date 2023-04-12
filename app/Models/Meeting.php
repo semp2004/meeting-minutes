@@ -29,16 +29,18 @@ class Meeting extends Model
     {
         return $this->belongsToMany(User::class, 'user_meetings', 'meeting_id', 'user_id');
     }
+
     public function agendaItems()
     {
-        $data = \DB::table('agenda_items')
-            ->join('users', 'agenda_items.user_id', '=', 'users.id')
-            ->select('users.name', 'agenda_items.user_id', 'agenda_items.id', 'agenda_items.content', 'agenda_items.category', 'agenda_items.finish_date')
-            ->where('agenda_items.meeting_id', $this->id)
-            ->get()
-            ->toArray();
+        return $this->hasMany(AgendaItem::class);
 
-        return $data;
+//        $data = \DB::table('agenda_items')
+//            ->join('users', 'agenda_items.user_id', '=', 'users.id')
+//            ->select('users.name', 'agenda_items.user_id', 'agenda_items.id', 'agenda_items.content', 'agenda_items.category', 'agenda_items.finish_date')
+//            ->where('agenda_items.meeting_id', $this->id)
+//            ->get()
+//            ->toArray();
+//
+//        return $data;
     }
-
 }

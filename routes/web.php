@@ -3,6 +3,7 @@
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AgendaItemController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/agenda-item/{agendaItem}', [AgendaItemController::class, 'edit']);
     Route::post('/meeting/agenda-item', [AgendaItemController::class, 'store']);
     Route::post('/agenda-item/update', [AgendaItemController::class, 'update'])->name('agenda-item.update');
+
+    //comments
+    Route::post('/comment/save', [CommentController::class, 'store'])->name('comment.store');
 });
 
 

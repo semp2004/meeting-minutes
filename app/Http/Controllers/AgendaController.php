@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AgendaItem;
 use App\Models\Meeting;
 use App\Models\MeetingParticipants;
 use App\Models\Template;
@@ -25,7 +26,8 @@ class AgendaController extends Controller
         return view('meetings.meeting', [
             'meeting' => $Meeting,
             'persons' => $persons,
-            'agendaItems' => $Meeting->agendaItems(),
+            //'agendaItems' => $Meeting->agendaItems,
+            'agendaItems' => $Meeting->agendaItems,
         ]);
     }
 

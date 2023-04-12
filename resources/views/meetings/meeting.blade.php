@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div
-                class="mt-10 bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg overflow-hidden overflow-x-auto p-6 bg-gray-800 min-w-full align-middle">
+                class="mt-10 shadow-sm sm:rounded-lg overflow-hidden overflow-x-auto p-6 bg-gray-800 min-w-full align-middle">
                 <form method="POST" action="/meeting/agenda-item">
                     @csrf
                     <label for="content" class="leading-4 font-medium text-white uppercase tracking-wider">Agenda punt
@@ -87,7 +87,7 @@
                                   maxlength="125" required/>
                     <div>
                     <textarea name="content" id="content" maxlength="200" placeholder="Agenda punt"
-                              class="dark:bg-gray-800 bg-gray-200 dark:text-gray-200 text-gray-800 border-gray-700 border-[1px] focus:outline-none focus:border-gray-400 resize-none px-4 py-2 rounded-lg w-full pb-20 whitespace-pre-wrap whitespace-pre-wrap"></textarea>
+                              class="dark:bg-gray-800 bg-gray-200 dark:text-gray-200 text-gray-800 border-gray-700 border-[1px] focus:outline-none focus:border-gray-400 resize-none px-4 py-2 rounded-lg w-full pb-20 whitespace-pre-wrap"></textarea>
                         <p id="result" class="select-none relative text-right bottom-8 right-2">0 / 200</p>
                     </div>
                     <div class="relative mt-2">
@@ -100,20 +100,25 @@
                 </form>
             </div>
             <div
-                class="mt-10 bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg overflow-hidden overflow-x-auto p-6 bg-gray-800 min-w-full align-middle">
+                class="mt-10 shadow-sm sm:rounded-lg overflow-hidden overflow-x-auto p-6 bg-gray-800 min-w-full align-middle">
                 <span class="leading-4 font-medium text-white uppercase tracking-wider">Agenda punten</span>
                 @php
                     $currentDate = date('Y-m-d');
                     $currentDate = date('Y-m-d', strtotime($currentDate));
+
+                    $agendaItemCount = 0;
+                    $commentCount = 0;
                 @endphp
                 @foreach($agendaItems as $agendaItem)
                     @php
-                        $nameArr = explode(' ', $agendaItem->name);
+                        $nameArr = explode(' ', $agendaItem->user->name);
 
                         $shortenedName = "";
                         foreach ($nameArr as $seperated)
                             $shortenedName = $shortenedName . $seperated[0];
+                        $agendaItemCount++;
                     @endphp
+                        <!-- Agenda Items -->
                     <div class="relative mt-4">
                         <span>
                             <h2 class="absolute -right-0 text-xl"
@@ -133,18 +138,112 @@
                                 <h2>Einddatum: {{ date('d-m-Y', strtotime($finishDate)) }}</h2>
                             @endif
                         </span>
+                        @if($agendaItem->user_id == Auth::user()->id)
+                            <a href="/agenda-item/{{ $agendaItem->id }}">
+                                <x-secondary-button><i class="fa-solid fa-pen-to-square"></i> Aanpassen
+                                </x-secondary-button>
+                            </a><br>
+                        @endif
+
+                        <x-secondary-button class="mt-2" id="button-{{ $agendaItemCount }}"> Opmerking
+                        </x-secondary-button>
+
+                        <!-- make comment -->
+                        <form method="POST" action="{{ route('comment.store') }}">
+                            @csrf
+                            <div>
+                                <label for="textarea-{{$agendaItemCount}}"></label><textarea
+                                    name="comment"
+                                    class="dark:bg-gray-800 bg-gray-200 dark:text-gray-200 text-gray-800 border-gray-700 border-[1px] focus:outline-none focus:border-gray-400 resize-none pl-4 pr-4 rounded-lg w-full whitespace-pre-wrap hidden mt-2 pb-12"
+                                    id="textarea-{{$agendaItemCount}}" maxlength="400" required></textarea>
+                                <p class="select-none relative text-right bottom-8 right-2 hidden"
+                                   id="textarea-result-{{$agendaItemCount}}">0 / 400</p>
+                            </div>
+                            <input type="hidden" name="agendaItem_id" value="{{ $agendaItem->id }}">
+                            <x-primary-button class="mt-[-10px] pt-1 pb-1 hidden"
+                                              id="commentButton-{{$agendaItemCount}}">Reageren
+                            </x-primary-button>
+                        </form>
+
+                        @if(count($agendaItem->comments) > 0)
+                            <div class="mt-2">
+                                <!-- Comments -->
+                                <span id="commentButton-{{$commentCount}}"><p id="commentButton-{{$commentCount}}" class="text-blue-400 cursor-pointer"><img
+                                            class="float-left rotate-180 w-[18px] mr-1"
+                                            alt="> "
+                                            src="{{ url('assets/arrow_icon.png') }}"
+                                            id="commentButtonIcon-{{$commentCount}}"> {{ count($agendaItem->comments) }}
+                                        opmerkingen</p></span>
+                                <div class="hidden" id="comment-{{ $commentCount }}">
+                                    @foreach ($agendaItem->comments as $comment)
+                                        @php
+                                            $shortenedComName = "";
+
+                                            foreach (explode(' ', $comment->user->name) as $comSeperated)
+                                                $shortenedComName = $shortenedComName . $comSeperated[0];
+                                        @endphp
+                                        <h2>{{ $shortenedComName }}</h2>
+                                        <div class="bg-gray-700 sm:rounded-md py-1 pl-2 mb-4">
+                                                <?= "<p>$comment->comment</p>"; ?>
+                                        </div>
+                                    @endforeach
+                                    <script>
+                                        let isClicked{{$commentCount}} = false;
+
+                                        window.addEventListener("click", function (event) {
+                                            const commentSrc{{$commentCount}} = document.getElementById("comment-{{ $commentCount }}");
+                                            const iconSrc{{$commentCount}} = document.getElementById("commentButtonIcon-{{$commentCount}}");
+
+                                            if (event.target.id === "commentButton-{{$commentCount}}" || event.target.id === "commentButtonIcon-{{$commentCount}}") {
+                                                if (isClicked{{$commentCount}}) {
+                                                    commentSrc{{$commentCount}}.style.display = "none";
+                                                    iconSrc{{$commentCount}}.classList.add("rotate-180");
+                                                    isClicked{{$commentCount}} = false;
+                                                } else {
+                                                    commentSrc{{$commentCount}}.style.display = "block";
+                                                    iconSrc{{$commentCount}}.classList.remove("rotate-180");
+                                                    isClicked{{$commentCount}} = true;
+                                                }
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                                @php
+                                    $commentCount++;
+                                @endphp
+                            </div>
+                        @endif
+
+                        <script>
+                            window.addEventListener("click", function (event) {
+                                const textArea{!! $agendaItemCount !!} = document.getElementById('textarea-{{$agendaItemCount}}');
+                                const result{!! $agendaItemCount !!} = document.getElementById('textarea-result-{{$agendaItemCount}}');
+                                const commentBtn{!! $agendaItemCount !!} = document.getElementById('commentButton-{{$agendaItemCount}}');
+
+                                if (event.target.id === 'button-{{ $agendaItemCount }}' || event.target.id === 'textarea-{{ $agendaItemCount }}' || event.target.id === 'textarea-result-{{$agendaItemCount}}') {
+                                    textArea{!! $agendaItemCount !!}.style.display = 'block';
+                                    result{!! $agendaItemCount !!}.style.display = 'block';
+                                    commentBtn{!! $agendaItemCount !!}.style.display = 'block';
+                                } else {
+                                    textArea{!! $agendaItemCount !!}.style.display = 'none';
+                                    result{!! $agendaItemCount !!}.style.display = 'none';
+                                    commentBtn{!! $agendaItemCount !!}.style.display = 'none';
+                                }
+                            });
+
+                            window.addEventListener('load', function () {
+                                const ta_source{!! $agendaItemCount !!} = document.getElementById('textarea-{{$agendaItemCount}}');
+                                const ta_result{!! $agendaItemCount !!} = document.getElementById('textarea-result-{{$agendaItemCount}}');
+
+                                const onInputHandler{!! $agendaItemCount !!} = function (event) {
+                                    ta_result{!! $agendaItemCount !!}.innerHTML = event.target.value.length + " / 400";
+                                }
+
+                                ta_source{!! $agendaItemCount !!}.addEventListener('input', onInputHandler{!! $agendaItemCount !!});
+                            });
+                        </script>
                     </div>
-                    @if($agendaItem->user_id == Auth::user()->id)
-                        <a href="/agenda-item/{{ $agendaItem->id }}">
-                            <x-secondary-button><i class="fa-solid fa-pen-to-square"></i> Aanpassen
-                            </x-secondary-button>
-                        </a>
-                    @endif
                 @endforeach
-                <div>
-                    <textarea
-                        class="dark:bg-gray-800 bg-gray-200 dark:text-gray-200 text-gray-800 border-gray-700 border-[1px] focus:outline-none focus:border-gray-400 resize-none pl-4 pr-4 rounded-lg w-full whitespace-pre-wrap whitespace-pre-wrap"></textarea>
-                </div>
             </div>
         </div>
     </div>
