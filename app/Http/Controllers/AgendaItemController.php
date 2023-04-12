@@ -26,7 +26,7 @@ class AgendaItemController extends Controller
             'id' => 'required|int',
         ]);
 
-        $data['content'] = str_replace("\n", "<br>", $data['content']);
+        $data['content'] = str_replace("\r\n", "<br>", $data['content']);
 
         $agendaItem = new AgendaItem();
         $agendaItem->content = $data['content'];
@@ -48,6 +48,8 @@ class AgendaItemController extends Controller
             'planned_time' => 'required|date',
             'id' => 'required|int',
         ]);
+
+        $data['content'] = str_replace("\r\n", "<br>", $data['content']);
 
         $agendaItem = AgendaItem::find($data['id']);
 

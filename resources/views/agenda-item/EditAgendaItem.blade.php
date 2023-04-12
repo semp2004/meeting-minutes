@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    @php
+        $agendaItem->content = str_replace("<br>", "\r\n", $agendaItem->content);
+    @endphp
     <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8 text-gray-800 dark:text-gray-100">
         <div
             class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg overflow-hidden overflow-x-auto p-6 bg-gray-800 min-w-full align-middle">
