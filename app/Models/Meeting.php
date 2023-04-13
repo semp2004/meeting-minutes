@@ -33,14 +33,5 @@ class Meeting extends Model
     public function agendaItems()
     {
         return $this->hasMany(AgendaItem::class);
-
-//        $data = \DB::table('agenda_items')
-//            ->join('users', 'agenda_items.user_id', '=', 'users.id')
-//            ->select('users.name', 'agenda_items.user_id', 'agenda_items.id', 'agenda_items.content', 'agenda_items.category', 'agenda_items.finish_date')
-//            ->where('agenda_items.meeting_id', $this->id)
-//            ->get()
-//            ->toArray();
-//
-//        return $data;
     }
 }

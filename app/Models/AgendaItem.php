@@ -29,4 +29,9 @@ class AgendaItem extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function meeting()
+    {
+        return $this->belongsTo(Meeting::class);
+    }
 }

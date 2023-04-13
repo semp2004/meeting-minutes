@@ -146,7 +146,7 @@
                             </a><br>
                         @endif
 
-                        <x-secondary-button class="mt-2" id="button-{{ $agendaItemCount }}"> Opmerking
+                        <x-secondary-button class="mt-2" id="button-{{ $agendaItemCount }}"> Opmerking maken
                         </x-secondary-button>
 
                         <!-- make comment -->
@@ -165,11 +165,10 @@
                                               id="commentButton-{{$agendaItemCount}}">Reageren
                             </x-primary-button>
                         </form>
-
+                        <!-- Comments -->
                         @if(count($agendaItem->comments) > 0)
                             <div class="mt-2">
-                                <!-- Comments -->
-                                <span id="commentButton-{{$commentCount}}"><p id="commentButton-{{$commentCount}}" class="text-blue-400 cursor-pointer">
+                                <span id="commentButton-{{$commentCount}}" class="select-none"><p id="commentButton-{{$commentCount}}" class="text-blue-400 cursor-pointer">
                                         <i class="fa-solid fa-arrow-down float-left rotate-180 w-[18px] mr-1" id="commentButtonIcon-{{$commentCount}}"></i>
                                         {{ count($agendaItem->comments) }}
                                         opmerkingen</p></span>
@@ -181,8 +180,24 @@
                                             foreach (explode(' ', $comment->user->name) as $comSeperated)
                                                 $shortenedComName = $shortenedComName . $comSeperated[0];
                                         @endphp
-                                        <h2>{{ $shortenedComName }}</h2>
-                                        <div class="bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2 mb-4">
+                                        <div class="relative">
+                                            <h2>{{ $shortenedComName }}</h2>
+                                            @if($comment->user_id === Auth::user()->id)
+                                                <a href="{{ route('comment.edit', $comment->id) }}">
+                                                    <x-secondary-button
+                                                        class="pl-2 pr-2 pt-2 pb-2 absolute -top-4 -right-[-30px]"
+                                                        title="Aanpassen"><i class="fa-solid fa-pen-to-square"></i>
+                                                    </x-secondary-button>
+                                                </a>
+                                                <a href="{{ route('comment.delete.confirmation', $comment->id) }}">
+                                                    <x-secondary-button
+                                                        class="pl-2 pr-2 pt-2 pb-2 absolute -top-4 -right-2"
+                                                        title="Verwijderen"><i
+                                                            class="fa-solid fa-eraser"></i></x-secondary-button>
+                                                </a>
+                                            @endif
+                                        </div>
+                                        <div class="bg-gray-700 sm:rounded-md py-1 pl-2 mb-4">
                                                 <?= "<p>$comment->comment</p>"; ?>
                                         </div>
                                     @endforeach

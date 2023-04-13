@@ -21,4 +21,8 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function agendaItem()
+    {
+        return $this->belongsTo(AgendaItem::class);
+    }
 }
