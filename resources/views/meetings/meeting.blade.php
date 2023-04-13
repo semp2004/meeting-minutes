@@ -197,7 +197,7 @@
                                                 </a>
                                             @endif
                                         </div>
-                                        <div class="bg-gray-700 sm:rounded-md py-1 pl-2 mb-4">
+                                        <div class="bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2 mb-4">
                                                 <?= "<p>$comment->comment</p>"; ?>
                                         </div>
                                     @endforeach
