@@ -168,11 +168,9 @@
                         @if(count($agendaItem->comments) > 0)
                             <div class="mt-2">
                                 <!-- Comments -->
-                                <span id="commentButton-{{$commentCount}}"><p id="commentButton-{{$commentCount}}" class="text-blue-400 cursor-pointer"><img
-                                            class="float-left rotate-180 w-[18px] mr-1"
-                                            alt="> "
-                                            src="{{ url('assets/arrow_icon.png') }}"
-                                            id="commentButtonIcon-{{$commentCount}}"> {{ count($agendaItem->comments) }}
+                                <span id="commentButton-{{$commentCount}}"><p id="commentButton-{{$commentCount}}" class="text-blue-400 cursor-pointer">
+                                        <i class="fa-solid fa-arrow-down float-left rotate-180 w-[18px] mr-1" id="commentButtonIcon-{{$commentCount}}"></i>
+                                        {{ count($agendaItem->comments) }}
                                         opmerkingen</p></span>
                                 <div class="hidden" id="comment-{{ $commentCount }}">
                                     @foreach ($agendaItem->comments as $comment)
@@ -197,11 +195,13 @@
                                             if (event.target.id === "commentButton-{{$commentCount}}" || event.target.id === "commentButtonIcon-{{$commentCount}}") {
                                                 if (isClicked{{$commentCount}}) {
                                                     commentSrc{{$commentCount}}.style.display = "none";
-                                                    iconSrc{{$commentCount}}.classList.add("rotate-180");
+                                                    iconSrc{{$commentCount}}.classList.remove('fa-arrow-up')
+                                                    iconSrc{{$commentCount}}.classList.add('fa-arrow-down')
                                                     isClicked{{$commentCount}} = false;
                                                 } else {
                                                     commentSrc{{$commentCount}}.style.display = "block";
-                                                    iconSrc{{$commentCount}}.classList.remove("rotate-180");
+                                                    iconSrc{{$commentCount}}.classList.remove('fa-arrow-down')
+                                                    iconSrc{{$commentCount}}.classList.add('fa-arrow-up')
                                                     isClicked{{$commentCount}} = true;
                                                 }
                                             }
