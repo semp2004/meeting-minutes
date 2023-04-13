@@ -78,11 +78,12 @@
                 </div>
             </div>
             <div
-                class="mt-10 shadow-sm sm:rounded-lg overflow-hidden overflow-x-auto p-6 bg-gray-800 min-w-full align-middle">
+                class="mt-10 shadow-sm sm:rounded-lg overflow-hidden overflow-x-auto p-6 bg-gray-200 dark:bg-gray-800 min-w-full align-middle">
                 <form method="POST" action="/meeting/agenda-item">
                     @csrf
-                    <label for="content" class="leading-4 font-medium text-white uppercase tracking-wider">Agenda punt
-                        aanmaken</label>
+{{--                    <label for="content" class="leading-4 font-medium text-white uppercase tracking-wider">Agenda punt--}}
+{{--                        aanmaken</label>--}}
+                    <x-input-label class="text-xl">Agenda punt aanmaken</x-input-label>
                     <x-text-input name="category" id="category" class="mt-2 mb-2" placeholder="Categorie"
                                   maxlength="125" required/>
                     <div>
@@ -100,8 +101,8 @@
                 </form>
             </div>
             <div
-                class="mt-10 shadow-sm sm:rounded-lg overflow-hidden overflow-x-auto p-6 bg-gray-800 min-w-full align-middle">
-                <span class="leading-4 font-medium text-white uppercase tracking-wider">Agenda punten</span>
+                class="mt-10 shadow-sm sm:rounded-lg overflow-hidden overflow-x-auto p-6 bg-gray-200 dark:bg-gray-800 min-w-full align-middle">
+                <span class="leading-4 font-medium text-black dark:text-white uppercase tracking-wider">Agenda punten</span>
                 @php
                     $currentDate = date('Y-m-d');
                     $currentDate = date('Y-m-d', strtotime($currentDate));
@@ -125,7 +126,7 @@
                                 title="{{ $agendaItem->name }}">{{ $shortenedName }}</h2>
                             <h2 class="text-xl">{{ $agendaItem->category }}</h2>
                         </span>
-                        <div class="bg-gray-700 sm:rounded-md py-1 pl-2">
+                        <div class="bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2">
                             <p><?= $agendaItem->content ?></p>
                         </div>
                         <span>
@@ -181,7 +182,7 @@
                                                 $shortenedComName = $shortenedComName . $comSeperated[0];
                                         @endphp
                                         <h2>{{ $shortenedComName }}</h2>
-                                        <div class="bg-gray-700 sm:rounded-md py-1 pl-2 mb-4">
+                                        <div class="bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2 mb-4">
                                                 <?= "<p>$comment->comment</p>"; ?>
                                         </div>
                                     @endforeach
