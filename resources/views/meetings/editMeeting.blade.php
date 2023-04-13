@@ -10,39 +10,39 @@
     {{--knop aanpassen, nieuwe meeting knop--}}
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="overflow-hidden overflow-x-auto p-6 bg-gray-800">
+            <div class="bg-gray-200 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="overflow-hidden overflow-x-auto p-6 bg-gray-200 dark:bg-gray-800">
                     <div class="min-w-full align-middle">
                         <table class="min-w-full border border-gray-600 divide-y divide-gray-600">
                             <thead>
                             <tr>
-                                <th class="bg-gray-800 px-6 py-3 bg-gray-700 text-left">
-                                    <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Naam van meeting</span>
+                                <th class="bg-gray-300 dark:bg-gray-800 px-6 py-3 text-left">
+                                    <span class="text-xs leading-4 font-medium text-black dark:text-white uppercase tracking-wider">Naam van meeting</span>
                                 </th>
-                                <th class="bg-gray-800 px-6 py-3 bg-gray-700 text-left border-l border-l-gray-700">
-                                    <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">datum meeting</span>
+                                <th class="bg-gray-300 dark:bg-gray-800 px-6 py-3 text-left border-l border-l-gray-700">
+                                    <span class="text-xs leading-4 font-medium text-black dark:text-white uppercase tracking-wider">datum meeting</span>
                                 </th>
-                                <th class="bg-gray-800 px-6 py-3 bg-gray-700 text-left border-l border-l-gray-700">
-                                    <span class="text-xs leading-4 font-medium text-white uppercase tracking-wider">Deelnemers</span>
+                                <th class="bg-gray-300 dark:bg-gray-800 px-6 py-3 text-left border-l border-l-gray-700">
+                                    <span class="text-xs leading-4 font-medium text-black dark:text-white uppercase tracking-wider">Deelnemers</span>
                                 </th>
                             </tr>
                             </thead>
-                            <tbody class="bg-gray-800 divide-y divide-gray-700">
+                            <tbody class="bg-gray-200 dark:bg-gray-800 divide-y divide-gray-700">
                             <tr>
                                 <form method="post" action="{{ route('meeting.update', $meeting->id)}}">
                                     @csrf
-                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white">
-                                        <p class="text-sm leading-5 text-white">
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-black dark:text-white">
+                                        <p class="text-sm leading-5 text-black dark:text-white">
                                             <x-text-input type="text" name="name" id="meetingname"
                                                           placeholder="Naam van meeting" value="{{ $meeting->name }}" class="w-full" required/>
                                         </p>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
-                                        <p class="text-sm leading-5 text-white">
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-black dark:text-white border-l border-l-gray-700">
+                                        <p class="text-sm leading-5 text-black dark:text-white">
                                             <x-text-input type="datetime-local" name="planned_time" id="meetingdate" class="w-full" value="{{ $meeting->planned_time }}" required/>
                                         </p>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-white border-l border-l-gray-700">
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-black dark:text-white border-l border-l-gray-700">
                                         <div id="checkboxes"
                                              class="w-72 h-20 overflow-y-scroll overflow-x-hidden border border-gray-300">
                                             @foreach($users as $user)
