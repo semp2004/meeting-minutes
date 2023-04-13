@@ -54,7 +54,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/agenda-item/update', [AgendaItemController::class, 'update'])->name('agenda-item.update');
 
     //comments
+    Route::get('comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
+    Route::get('/comment/delete/{id}', [CommentController::class, 'confirmation'])->name('comment.delete.confirmation');
     Route::post('/comment/save', [CommentController::class, 'store'])->name('comment.store');
+    Route::post('/comment/update', [CommentController::class, 'update'])->name('comment.update');
+    Route::post('/comment/delete/', [CommentController::class, 'delete'])->name('comment.delete');
 });
 
 
