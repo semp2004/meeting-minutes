@@ -2,15 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Besluit;
+use Illuminate\Http\Request;
+
 class BesluitController extends Controller
 {
-    public function view()
+    public function view($id)
     {
-
+        return view('Besluit',[
+            'id' => $id
+        ]);
     }
 
-    public function store()
+    public function store(Request $request, $id)
     {
+        $data = $request -> validate([
+            'besluit' => 'required|string|max:400',
+        ]);
 
+        $besluit = $data['besluit'];
+
+        $NewBesluit = new Besluit();
+        $NewBesluit->besluit = $besluit;
+        $NewBesluit->item_id = $id;
+        $NewBesluit->save();
+
+        return redirect(route('dashboard'));
     }
 }
