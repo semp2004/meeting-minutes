@@ -17,7 +17,7 @@ class BesluitController extends Controller
     public function store(Request $request, $id)
     {
         $data = $request -> validate([
-            'besluit' => 'required|string|max:400',
+            'besluit' => 'required|string|max:600',
         ]);
 
         $besluit = $data['besluit'];
