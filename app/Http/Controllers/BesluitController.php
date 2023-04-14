@@ -24,7 +24,7 @@ class BesluitController extends Controller
 
         $NewBesluit = new Besluit();
         $NewBesluit->besluit = $besluit;
-        $NewBesluit->item_id = $id;
+        $NewBesluit->agenda_item_id = $id;
         $NewBesluit->save();
 
         return redirect(route('dashboard'));

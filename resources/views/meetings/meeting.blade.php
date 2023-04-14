@@ -129,6 +129,12 @@
                         <div class="bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2">
                             <p><?= $agendaItem->content ?></p>
                         </div>
+                        @if($agendaItem->besluit != null)
+                            <br/>
+                            <div class="bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2">
+                                <p class="text-red-700 dark:text-red-500">Besluit: <?= $agendaItem->besluit->besluit ?></p>
+                            </div>
+                        @endif
                         <span>
                             @php
                                 $finishDate = date('Y-m-d', strtotime($agendaItem->finish_date));

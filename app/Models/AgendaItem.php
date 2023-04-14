@@ -34,4 +34,9 @@ class AgendaItem extends Model
     {
         return $this->belongsTo(Meeting::class);
     }
+
+    public function Besluit()
+    {
+        return $this->hasOne(Besluit::class);
+    }
 }

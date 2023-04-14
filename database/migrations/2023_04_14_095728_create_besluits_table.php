@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('besluits', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("item_id")->references("id")->on("agenda_items")->onDelete("cascade");
+            $table->foreignId("agenda_item_id")->references("id")->on("agenda_items")->onDelete("cascade");
             $table->string('besluit');
             $table->timestamps();
         });
