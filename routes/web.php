@@ -50,8 +50,10 @@ Route::middleware('auth')->group(function () {
 
     //agenda items
     Route::get('/agenda-item/{agendaItem}', [AgendaItemController::class, 'edit'])->name('agenda-item.edit');
+    Route::get('/agenda-item/delete/{id}', [AgendaItemController::class, 'confirmation'])->name('agenda-item.delete.confirm');
     Route::post('/meeting/agenda-item', [AgendaItemController::class, 'store']);
     Route::post('/agenda-item/update', [AgendaItemController::class, 'update'])->name('agenda-item.update');
+    Route::post('/agenda-item/delete', [AgendaItemController::class, 'delete'])->name('agenda-item.delete');
 
     // Besluiten
     Route::get('/besluit/', [\App\Http\Controllers\BesluitController::class, 'besluiten'])->name('besluiten');
