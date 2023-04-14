@@ -20,6 +20,12 @@
                         <x-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
                             {{ __('Agenda') }}
                         </x-nav-link>
+
+                        <x-nav-link :href="route('besluiten')" :active="request()->routeIs('agenda')">
+                            {{ __('Besluiten') }}
+                        </x-nav-link>
+
+
                     @endif
 
                     <x-has-permission permission-name="{{\App\Enums\Permission::EditUser->name}}">

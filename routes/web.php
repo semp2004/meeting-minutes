@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/agenda-item/update', [AgendaItemController::class, 'update'])->name('agenda-item.update');
 
     // Besluiten
-
+    Route::get('/besluit/', [\App\Http\Controllers\BesluitController::class, 'besluiten'])->name('besluiten');
     Route::get('/besluit/{agendaItem}', [\App\Http\Controllers\BesluitController::class, 'view'])->name('besluit');
     Route::post('/besluit/{agendaItem}', [\App\Http\Controllers\BesluitController::class, 'store'])->name('besluit.post');
 

@@ -9,7 +9,7 @@ class BesluitController extends Controller
 {
     public function view($id)
     {
-        return view('Besluit',[
+        return view('besluiten.Besluit',[
             'id' => $id
         ]);
     }
@@ -28,5 +28,13 @@ class BesluitController extends Controller
         $NewBesluit->save();
 
         return redirect(route('dashboard'));
+    }
+
+    public function besluiten() {
+        $Besluiten = Besluit::all();
+
+        return view('besluiten.Besluiten', [
+            'besluiten' => $Besluiten
+        ]);
     }
 }
