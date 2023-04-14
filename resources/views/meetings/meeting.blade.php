@@ -149,6 +149,13 @@
                         <x-secondary-button class="mt-2" id="button-{{ $agendaItemCount }}"> Opmerking maken
                         </x-secondary-button>
 
+                        <form method="post" action="{{route('besluit', $agendaItem->id)}}">
+                            @csrf
+                            <x-secondary-button>
+                                Besluiten
+                            </x-secondary-button>
+                        </form>
+
                         <!-- make comment -->
                         <form method="POST" action="{{ route('comment.store') }}">
                             @csrf
