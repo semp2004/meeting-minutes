@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/meeting/{meeting}', [AgendaController::class, 'meeting']);
 
     //agenda items
-    Route::get('/agenda-item/{agendaItem}', [AgendaItemController::class, 'edit']);
+    Route::get('/agenda-item/{agendaItem}', [AgendaItemController::class, 'edit'])->name('agenda-item.edit');
     Route::post('/meeting/agenda-item', [AgendaItemController::class, 'store']);
     Route::post('/agenda-item/update', [AgendaItemController::class, 'update'])->name('agenda-item.update');
 

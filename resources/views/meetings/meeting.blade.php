@@ -139,8 +139,8 @@
                                 <h2>Einddatum: {{ date('d-m-Y', strtotime($finishDate)) }}</h2>
                             @endif
                         </span>
-                        @if($agendaItem->user_id == Auth::user()->id)
-                            <a href="/agenda-item/{{ $agendaItem->id }}">
+                        @if($agendaItem->user_id === Auth::user()->id)
+                            <a href="{{ route('agenda-item.edit', $agendaItem->id) }}">
                                 <x-secondary-button><i class="fa-solid fa-pen-to-square"></i> Aanpassen
                                 </x-secondary-button>
                             </a><br>
