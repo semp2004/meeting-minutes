@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AgendaItem;
+use App\Models\Agenda;
 use App\Models\Meeting;
 use App\Models\MeetingParticipants;
-use App\Models\Template;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Agenda;
 
 
 class AgendaController extends Controller
@@ -26,8 +24,8 @@ class AgendaController extends Controller
         return view('meetings.meeting', [
             'meeting' => $Meeting,
             'persons' => $persons,
-            //'agendaItems' => $Meeting->agendaItems,
             'agendaItems' => $Meeting->agendaItems,
+            'actionItem' => $Meeting->actionItems
         ]);
     }
 
@@ -75,6 +73,7 @@ class AgendaController extends Controller
         return redirect('/agenda')->with('success', 'Meeting is toegevoegd!');
 
     }
+
     public function update(Request $request, Meeting $Meeting)
     {
         $data = $request->validate([

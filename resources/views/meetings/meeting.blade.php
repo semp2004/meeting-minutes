@@ -111,6 +111,7 @@
                     $commentCount = 0;
                 @endphp
                 @foreach($agendaItems as $agendaItem)
+
                     @php
                         $nameArr = explode(' ', $agendaItem->user->name);
 
