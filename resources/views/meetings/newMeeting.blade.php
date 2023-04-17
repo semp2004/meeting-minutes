@@ -45,10 +45,6 @@
                                                           placeholder="Datum van meeting" class="w-full" required/>
                                         </p>
                                     </td>
-
-                                    {{--                                    --}}
-
-                                    {{--                                    --}}
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5  border-l border-l-gray-700">
                                         <div id="checkboxes"
                                              class="w-72 h-20 overflow-y-scroll overflow-x-hidden border border-gray-300">
