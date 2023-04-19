@@ -23,11 +23,11 @@ class AgendaController extends Controller
     public function meeting(Meeting $meeting, agendaItem $agenda)
     {
         $persons = $meeting->persons;
-//        dd($agenda->actionPoints()->get());
         return view('meetings.meeting', [
             'meeting' => $meeting,
             'persons' => $persons,
-            'actionItem' => $Meeting->actionItems
+            'actionItem' => $meeting->actionItems,
+            'actionItems' => $agenda->actionPoints()->get(),
         ]);
     }
 

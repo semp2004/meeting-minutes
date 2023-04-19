@@ -155,21 +155,79 @@
                                         <h2>Einddatum: {{ date('d-m-Y', strtotime($finishDate)) }}</h2>
                                     @endif
                                 </span>
+{{--                                --}}
+
+                                {{--diplay Action items--}}
+                                <br/>
+                                <span class="leading-4 font-medium text-black dark:text-white uppercase tracking-wider">Actie punten</span>
+                                <div class="flex flex-col-reverse divide-y divide-y-reverse bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2 pb-7">
+                                    @foreach($agendaItem->actionPoints as $actionItem)
+                                        <div class="text-green-600 dark:text-green-400 bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2">
+                                            @php
+                                                $nameArr = explode(' ', $actionItem->user->name);
+
+                                                $shortenedName = "";
+                                                foreach ($nameArr as $seperated)
+                                                    $shortenedName = $shortenedName . $seperated[0];
+                                                $agendaItemCount++;
+                                            @endphp
+
+
+
+                                            @if($actionItem->status == "OPENED")
+
+                                                <p class="absolute -right-0 text-xl text-green-200 text-sm leading-5 ">{{$actionItem->assigned_date}}</p>
+                                                <p class="text-sm leading-5 text-green-600 dark:text-green-400">Actief</p>
+                                                <p class="absolute -right-0 text-xl text-green-200 text-sm leading-5 ">{{$shortenedName}}</p>
+                                                <form method="post" action="{{route('action-item.update')}}">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{$actionItem->id}}">
+                                                    <x-secondary-button class="absolute right-0 mb-2.5 mr-3 mt-6 p-5">Afronden</x-secondary-button>
+                                                </form>
+
+
+                                            @elseif($actionItem->status == "CLOSED")
+
+                                                <p class="absolute -right-0 text-xl text-green-200 text-sm leading-5 ">{{$actionItem->completed_date}}</p>
+                                                <p class="text-sm leading-5 text-red-600 dark:text-red-400">Afgerond</p>
+                                                <p class="absolute -right-0 text-xl text-green-200 text-sm leading-5 ">{{$shortenedName}}</p>
+
+                                            @endif
+                                            <p class="text-xl text-green-200 text-sm leading-5">{{$actionItem->title}}</p>
+                                            <p class=""><?= $actionItem->content ?></p>
+                                            <br>
+
+                                        </div>
+                                    @endforeach
+                                </div>
+
+
+
+                                {{--                                --}}
                                 <div>
                                     @if($agendaItem->user_id === Auth::user()->id)
                                         <a href="{{ route('agenda-item.edit', $agendaItem->id) }}">
-                                            <x-secondary-button class=""><i class="fa-solid fa-pen-to-square"></i> Aanpassen
+                                            <x-secondary-button class=""><i class="fa-solid fa-pen-to-square"></i>
+                                                Aanpassen
                                             </x-secondary-button>
                                         </a><br>
                                     @endif
                                     <x-secondary-button id="button-{{ $agendaItemCount }}"> Opmerking maken
                                     </x-secondary-button>
 
-                                <form method="get" action="{{route('besluit', $agendaItem->id)}}">
-                                    <x-secondary-button>
-                                        Besluiten
-                                    </x-secondary-button>
-                                </form>
+                                    <!-- action items -->
+                                    <form method="get" action="{{route('action-item.add', $agendaItem->id)}}">
+                                        <x-secondary-button>
+                                            <i class="fa-solid fa-pen-to-square"></i> Actie punten
+                                        </x-secondary-button>
+                                    </form>
+
+
+                                    <form method="get" action="{{route('besluit', $agendaItem->id)}}">
+                                        <x-secondary-button>
+                                            Besluiten
+                                        </x-secondary-button>
+                                    </form>
                                 </div>
 
                                 <!-- make comment -->
