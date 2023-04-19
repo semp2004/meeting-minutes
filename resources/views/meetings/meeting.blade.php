@@ -159,6 +159,7 @@
 
                                 {{--diplay Action items--}}
                                 <br/>
+                                @if(count($agendaItem->actionPoints) !== 0)
                                 <span class="leading-4 font-medium text-black dark:text-white uppercase tracking-wider">Actie punten</span>
                                 <div class="flex flex-col-reverse divide-y divide-y-reverse bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2 pb-7">
                                     @foreach($agendaItem->actionPoints as $actionItem)
@@ -200,8 +201,7 @@
                                         </div>
                                     @endforeach
                                 </div>
-
-
+                                @endif
 
                                 {{--                                --}}
                                 <div>
