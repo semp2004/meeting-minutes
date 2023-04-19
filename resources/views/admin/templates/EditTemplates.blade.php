@@ -12,13 +12,11 @@
         <table class="text-center w-full">
             <tr>
                 <th>Naam</th>
-                <th>Agenda punten</th>
             </tr>
 
             @foreach($templates as $Template)
                 <tr>
                     <td>{{$Template->name}}</td>
-                    <td>{{$Template->points}}</td>
 
                     <td class="grid grid-cols-1">
                         <form method="get" action="{{route('EditTemplate', ['id' => $Template->id])}}">
