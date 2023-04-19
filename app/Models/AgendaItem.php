@@ -39,4 +39,9 @@ class AgendaItem extends Model
     {
         return $this->hasOne(Besluit::class);
     }
+
+    public function actionPoints()
+    {
+        return $this->hasMany(Actionpoint::class);
+    }
 }

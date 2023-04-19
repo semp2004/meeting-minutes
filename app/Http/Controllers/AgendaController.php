@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agenda;
+use App\Models\AgendaItem;
 use App\Models\Meeting;
 use App\Models\MeetingParticipants;
 use App\Models\User;
@@ -18,14 +19,15 @@ class AgendaController extends Controller
         ]);
     }
 
-    public function meeting(Meeting $Meeting)
+    public function meeting(Meeting $meeting, agendaItem $agenda)
     {
-        $persons = $Meeting->persons;
+        $persons = $meeting->persons;
+//        dd($agenda->actionPoints()->get());
         return view('meetings.meeting', [
-            'meeting' => $Meeting,
+            'meeting' => $meeting,
             'persons' => $persons,
-            'agendaItems' => $Meeting->agendaItems,
-            'actionItem' => $Meeting->actionItems
+            'agendaItems' => $meeting->agendaItems,
+            'actionItems' => $agenda->actionPoints()->get(),
         ]);
     }
 

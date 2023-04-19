@@ -34,4 +34,9 @@ class Meeting extends Model
     {
         return $this->hasMany(AgendaItem::class);
     }
+
+    public function actionPoints()
+    {
+        return $this->hasMany(Actionpoint::class);
+    }
 }

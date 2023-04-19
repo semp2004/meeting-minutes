@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Actionpoint extends Model
 {
     use HasFactory;
+
     protected $table = "action_points";
     protected $fillable = [
         'title',
@@ -20,15 +21,23 @@ class Actionpoint extends Model
         'user_id',
     ];
 
-    function meeting() {
+    function meeting()
+    {
         return $this->belongsTo(Meeting::class);
     }
 
-    function user() {
+    function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    function agendaItem() {
+    function agendaItem()
+    {
         return $this->belongsTo(AgendaItem::class);
+    }
+
+    public function actionPoints()
+    {
+        return $this->hasMany(Actionpoint::class);
     }
 }

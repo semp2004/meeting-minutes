@@ -81,8 +81,6 @@
                 class="mt-10 shadow-sm sm:rounded-lg overflow-hidden overflow-x-auto p-6 bg-gray-200 dark:bg-gray-800 min-w-full align-middle">
                 <form method="POST" action="/meeting/agenda-item">
                     @csrf
-{{--                    <label for="content" class="leading-4 font-medium text-white uppercase tracking-wider">Agenda punt--}}
-{{--                        aanmaken</label>--}}
                     <x-input-label class="text-xl">Agenda punt aanmaken</x-input-label>
                     <x-text-input name="category" id="category" class="mt-2 mb-2" placeholder="Categorie"
                                   maxlength="125" required/>
@@ -102,7 +100,8 @@
             </div>
             <div
                 class="mt-10 shadow-sm sm:rounded-lg overflow-hidden overflow-x-auto p-6 bg-gray-200 dark:bg-gray-800 min-w-full align-middle">
-                <span class="leading-4 font-medium text-black dark:text-white uppercase tracking-wider">Agenda punten</span>
+                <span
+                    class="leading-4 font-medium text-black dark:text-white uppercase tracking-wider">Agenda punten</span>
                 @php
                     $currentDate = date('Y-m-d');
                     $currentDate = date('Y-m-d', strtotime($currentDate));
@@ -130,10 +129,56 @@
                         <div class="bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2">
                             <p><?= $agendaItem->content ?></p>
                         </div>
+
+                        {{--diplay Action items--}}
+                        <br/>
+                        <span class="leading-4 font-medium text-black dark:text-white uppercase tracking-wider">Actie punten</span>
+                        <div class="flex flex-col-reverse divide-y divide-y-reverse bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2">
+                            @foreach($agendaItem->actionPoints as $actionItem)
+                                <div class="text-green-600 dark:text-green-400 bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2">
+                                    @php
+                                        $nameArr = explode(' ', $actionItem->user->name);
+
+                                        $shortenedName = "";
+                                        foreach ($nameArr as $seperated)
+                                            $shortenedName = $shortenedName . $seperated[0];
+                                        $agendaItemCount++;
+                                    @endphp
+
+
+
+                                    @if($actionItem->status == "OPENED")
+
+                                        <p class="absolute -right-0 text-xl text-green-200 text-sm leading-5 ">{{$actionItem->assigned_date}}</p>
+                                        <p class="text-sm leading-5 text-green-600 dark:text-green-400">Actief</p>
+                                        <p class="absolute -right-0 text-xl text-green-200 text-sm leading-5 ">{{$shortenedName}}</p>
+                                        <form method="post" action="{{route('action-item.update')}}">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$actionItem->id}}">
+                                            <x-secondary-button class="absolute -right-0 mr-3 mt-6 p-5">Afronden</x-secondary-button>
+                                        </form>
+
+
+                                    @elseif($actionItem->status == "CLOSED")
+
+                                        <p class="absolute -right-0 text-xl text-green-200 text-sm leading-5 ">{{$actionItem->completed_date}}</p>
+                                        <p class="text-sm leading-5 text-red-600 dark:text-red-400">Afgerond</p>
+                                        <p class="absolute -right-0 text-xl text-green-200 text-sm leading-5 ">{{$shortenedName}}</p>
+
+                                    @endif
+                                    <p class="text-xl text-green-200 text-sm   leading-5 ">{{$actionItem->title}}</p>
+                                    <p class=""><?= $actionItem->content ?></p>
+                                    <br>
+
+                                </div>
+                            @endforeach
+                        </div>
+
                         @if($agendaItem->besluit != null)
                             <br/>
                             <div class="bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2">
-                                <p class="text-red-700 dark:text-red-500">Besluit: <?= $agendaItem->besluit->besluit ?></p>
+                                <p class="text-red-700 dark:text-red-500">
+                                    Besluit: <?= $agendaItem->besluit->besluit ?></p>
                             </div>
                         @endif
                         <span>
@@ -156,9 +201,17 @@
                         <x-secondary-button class="mt-2" id="button-{{ $agendaItemCount }}"> Opmerking maken
                         </x-secondary-button>
 
+
                         <form method="get" action="{{route('besluit', $agendaItem->id)}}">
                             <x-secondary-button>
                                 Besluiten
+                            </x-secondary-button>
+                        </form>
+
+                        <!-- action items -->
+                        <form method="get" action="{{route('action-item.add', $agendaItem->id)}}">
+                            <x-secondary-button>
+                                    <i class="fa-solid fa-pen-to-square"></i> Actie punten
                             </x-secondary-button>
                         </form>
 
@@ -181,8 +234,10 @@
                         <!-- Comments -->
                         @if(count($agendaItem->comments) > 0)
                             <div class="mt-2">
-                                <span id="commentButton-{{$commentCount}}" class="select-none"><p id="commentButton-{{$commentCount}}" class="text-blue-400 cursor-pointer">
-                                        <i class="fa-solid fa-arrow-down float-left rotate-180 w-[18px] mr-1" id="commentButtonIcon-{{$commentCount}}"></i>
+                                <span id="commentButton-{{$commentCount}}" class="select-none"><p
+                                        id="commentButton-{{$commentCount}}" class="text-blue-400 cursor-pointer">
+                                        <i class="fa-solid fa-arrow-down float-left rotate-180 w-[18px] mr-1"
+                                           id="commentButtonIcon-{{$commentCount}}"></i>
                                         {{ count($agendaItem->comments) }}
                                         opmerkingen</p></span>
                                 <div class="hidden" id="comment-{{ $commentCount }}">

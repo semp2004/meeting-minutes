@@ -35,7 +35,23 @@ class ActionItemController extends Controller
         $NewPoint->assigned_date = $data['assigned_date'];
         $NewPoint->save();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('agenda');
+
+    }
+
+    public function update(Request $request)
+    {
+        $data = $request->validate([
+            'id' => 'required|integer',
+        ]);
+
+
+        $NewPoint = Actionpoint::findOrFail($data['id']);
+        $NewPoint->status = "CLOSED";
+        $NewPoint->completed_date = date(now());
+        $NewPoint->save();
+
+        return back(302);
 
     }
 }
