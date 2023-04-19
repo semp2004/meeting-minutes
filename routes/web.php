@@ -55,12 +55,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/agenda-item/update', [AgendaItemController::class, 'update'])->name('agenda-item.update');
     Route::post('/agenda-item/delete', [AgendaItemController::class, 'delete'])->name('agenda-item.delete');
 
-    // Besluiten
+    //action items
+    Route::get('/action-item/action/{agendaItem}', [\App\Http\Controllers\ActionItemController::class, 'add'])->name('action-item.add');
+    Route::post('/action-item/action', [\App\Http\Controllers\ActionItemController::class, 'store'])->name('action-item.store');
+    Route::post('/action-item/update', [\App\Http\Controllers\ActionItemController::class, 'update'])->name('action-item.update');
+
+// Besluiten
     Route::get('/besluit/', [\App\Http\Controllers\BesluitController::class, 'besluiten'])->name('besluiten');
     Route::get('/besluit/{agendaItem}', [\App\Http\Controllers\BesluitController::class, 'view'])->name('besluit');
     Route::post('/besluit/{agendaItem}', [\App\Http\Controllers\BesluitController::class, 'store'])->name('besluit.post');
 
-    //comments
+//comments
     Route::get('comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
     Route::get('/comment/delete/{id}', [CommentController::class, 'confirmation'])->name('comment.delete.confirmation');
     Route::post('/comment/save', [CommentController::class, 'store'])->name('comment.store');
