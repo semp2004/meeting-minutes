@@ -14,7 +14,7 @@ class AgendaItem extends Model
     public $timestamps = false;
     protected $fillable = [
         'user_id',
-        'meeting_id',
+        'template_topic_id',
         'content',
         'category',
         'finish_date',
@@ -30,9 +30,14 @@ class AgendaItem extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function meeting()
+    // public function meeting()
+    // {
+    //     return $this->belongsTo(Meeting::class);
+    // }
+
+    public function topic()
     {
-        return $this->belongsTo(Meeting::class);
+        return $this->belongsTo(TemplateTopic::class, 'template_topic_id', 'id');
     }
 
     public function Besluit()

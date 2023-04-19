@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Template;
+use App\Models\TemplateTopic;
 use Illuminate\Http\Request;
 
 class EditTemplateController extends Controller
@@ -22,25 +23,39 @@ class EditTemplateController extends Controller
 
     public function store(Request $request, int $id)
     {
+        $data = $request->validate([
+            'name' => 'required|string',
+            'header' => 'required|string',
+            'topics' => 'required|string',
+        ]);
+
+        $topics = explode("\r\n", $data['topics']);
+
         $template = Template::where('id', $id)->FirstOrFail();
 
-        // Variables for get/post vars
-        $name = $request->input('name');
-        $header = $request->input('header');
-        $points = $request->input('points');
+        $template->name = $data['name'];
+        $template->header = $data['header'];
 
-        // Check if variables are null
-        if ($name == null) return abort(400);
-        if ($header == null) return abort(400);
-        if ($points == null) return abort(400);
-
-        // Update Template model
-        $template->name = $name;
-        $template->header = $header;
-        $template->points = $points;
-
-        // Save model
         $template->save();
-        return $this ->index();
+
+        foreach (TemplateTopic::where('template_id', $template->id)->get() as $topic)
+        {
+            if (count($topic->agendaItems) !== 0)
+                return $this->index();
+        }
+
+        TemplateTopic::where('template_id', $template->id)->delete();
+        foreach ($topics as $topic) {
+            if (!empty($topic)) {
+                $templateTopic = new TemplateTopic();
+
+                $templateTopic->template_id = $template->id;
+                $templateTopic->topic = $topic;
+
+                $templateTopic->save();
+            }
+        }
+
+        return $this->index();
     }
 }

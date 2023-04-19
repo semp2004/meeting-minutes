@@ -18,7 +18,6 @@ class TemplateFactory extends Factory
             'user_id' => $User->id,
             'name' => $this->faker->word(),
             'header' => $this->faker->word(),
-            'points' => $this->faker->word(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

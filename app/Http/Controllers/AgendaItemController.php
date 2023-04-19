@@ -51,12 +51,12 @@ class AgendaItemController extends Controller
         $agendaItem->category = $data['category'];
         $agendaItem->finish_date = $data['planned_time'];
 
-        $agendaItem->meeting_id = $data['id'];
+        $agendaItem->template_topic_id = $data['id'];
         $agendaItem->user_id = auth()->user()->id;
 
         $agendaItem->save();
 
-        return redirect("/meeting/{$data['id']}");
+        return redirect()->back();
     }
     public function update(Request $request/*, AgendaItem $agendaItem*/)
     {
@@ -80,7 +80,7 @@ class AgendaItemController extends Controller
 
         $agendaItem->save();
 
-        return redirect("/meeting/$agendaItem->meeting_id");
+        return redirect()->back();
     }
 
     public function delete(Request $request)
@@ -97,10 +97,10 @@ class AgendaItemController extends Controller
         if ($agendaItem->user_id !== Auth::user()->id)
             abort(403);
 
-        $meeting_id = $agendaItem->meeting->id;
+        $meeting_id = $agendaItem->topic->template->meeting->id;
 
         $agendaItem->delete();
 
-        return redirect("meeting/$meeting_id");
+        return redirect("/meeting/" . $meeting_id);
     }
 }

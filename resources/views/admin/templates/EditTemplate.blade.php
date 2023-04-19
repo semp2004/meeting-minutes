@@ -2,7 +2,6 @@
 @props(['Template' => [
     'name' => '',
     'header' => '',
-    'points' => ''
 ]])
 
 @section('submit_button')
@@ -19,6 +18,17 @@
 
 
 @section('content')
+    @php
+        $topics = "";
+        $i = 1;
+        foreach ($Template->topics as $topic) {
+            $topics = $topics . $topic->topic;
+
+            if (count($Template->topics) !== $i)
+                $topics = $topics . "\r\n";
+            $i++;
+        }
+    @endphp
     <form class="mt-10 ml-96 mr-96 text-xl" method="post" class="mt-4">
         @csrf
         <div class="bg-gray-200 dark:bg-gray-800 rounded px-16 pt-6 pb-8 mb-4 ml-40 mr-40">
@@ -34,12 +44,10 @@
                               value="{{$Template->header}}"></x-text-input>
             </div>
             <div class="mb-4">
-                <x-input-label for="points" class="w-full pl-0.5">Agenda punten</x-input-label>
-                <x-textarea class="w-full pl-2" name="points"
-                              placeholder="Teveel leerlingen eten aan tafel" value="{{$Template->points}}"></x-textarea>
-
+                <x-input-label for="topics" class="w-full pl-0.5">Hoofdstukken</x-input-label>
+                <x-textarea name="topics" id="topics" class="w-full pl-2" placeholder="Hoofdstuk #1&#10;Hoofdstuk #2"
+                            value="{{$topics}}"></x-textarea>
             </div>
-
             @yield('submit_button')
         </div>
     </form>

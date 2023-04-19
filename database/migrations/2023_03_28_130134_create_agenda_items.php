@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('user_id');
-            $table->foreignId('meeting_id');
+            $table->foreignId('template_topic_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('meeting_id')->references('id')->on('meetings')->onDelete('cascade');
+            $table->foreign('template_topic_id')->references('id')->on('template_topics')->onDelete('cascade');
 
             $table->longText('category');
             $table->longText('content');

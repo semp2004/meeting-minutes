@@ -27,11 +27,14 @@
                                     <span
                                         class="text-xs leading-4 font-medium  uppercase tracking-wider">Deelnemers</span>
                                 </th>
+                                <th class="px-6 py-3 text-left border-l border-l-gray-700">
+                                    <span class="text-xs leading-4 font-medium uppercase tracking-wider">Template</span>
+                                </th>
                             </tr>
                             </thead>
                             <tbody class=" divide-y divide-gray-700">
                             <tr>
-                                <form method="post" action="{{ route('meeting.store') }}">
+                                <form method="post" action="{{ route('meeting.store') }}" id="meetingForm">
                                     @csrf
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 ">
                                         <p class="text-sm leading-5 ">
@@ -60,14 +63,24 @@
                                             @endforeach
                                         </div>
                                     </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5  border-l border-l-gray-700">
+                                        <label for="template">
+                                            <select name="template" id="templates" class="bg-gray-800 rounded-lg">
+                                                <option disabled selected>Kies een template</option>
+                                                @foreach($templates as $template)
+                                                    <option value="{{$template->id}}">{{$template->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </label>
+                                    </td>
+                                </form>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="mt-2 flex justify-center">
-                        <x-secondary-button class="items-center" onclick="submit()">Nieuwe meeting</x-secondary-button>
-                        </form>
-
+                        <x-secondary-button class="items-center" form="meetingForm" onclick="submit()">Nieuwe meeting
+                        </x-secondary-button>
                     </div>
                     <br>
                 </div>

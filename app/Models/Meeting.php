@@ -30,9 +30,14 @@ class Meeting extends Model
         return $this->belongsToMany(User::class, 'user_meetings', 'meeting_id', 'user_id');
     }
 
-    public function agendaItems()
+    // public function agendaItems()
+    // {
+    //     return $this->hasMany(AgendaItem::class);
+    // }
+
+    public function template()
     {
-        return $this->hasMany(AgendaItem::class);
+        return $this->belongsTo(Template::class);
     }
 
     public function actionPoints()
