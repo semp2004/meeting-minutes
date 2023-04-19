@@ -65,7 +65,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/besluit/{agendaItem}', [\App\Http\Controllers\BesluitController::class, 'view'])->name('besluit');
     Route::post('/besluit/{agendaItem}', [\App\Http\Controllers\BesluitController::class, 'store'])->name('besluit.post');
 
-//comments
+    Route::get('/besluit/like/{Decision}', [\App\Http\Controllers\DecisionController::class, 'like'])->name('besluit.like');
+    Route::get('/besluit/dislike/{Decision}', [\App\Http\Controllers\DecisionController::class, 'dislike'])->name('besluit.dislike');
+
+    //comments
     Route::get('comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
     Route::get('/comment/delete/{id}', [CommentController::class, 'confirmation'])->name('comment.delete.confirmation');
     Route::post('/comment/save', [CommentController::class, 'store'])->name('comment.store');

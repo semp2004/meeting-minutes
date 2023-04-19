@@ -11,6 +11,9 @@
                 <div class="mx-auto max-w-md rounded-lg bg-gray-300 dark:bg-gray-700 shadow w-full text-center">
                     <div class="p-4">
                         <p class="mt-1 text-white">{{$besluit->besluit}}</p>
+                        <x-decision-like decision-id="{{$besluit->id}}"/>
+                        <x-decision-dislike decision-id="{{$besluit->id}}"/>
+                        <x-decision-total-likes decision-id="{{$besluit->id}}"/>
                     </div>
                 </div>
             @endforeach
