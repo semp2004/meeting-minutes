@@ -161,7 +161,7 @@
                                 <br/>
                                 @if(count($agendaItem->actionPoints) !== 0)
                                 <span class="leading-4 font-medium text-black dark:text-white uppercase tracking-wider">Actie punten</span>
-                                <div class="flex flex-col-reverse divide-y divide-y-reverse bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2 pb-7">
+                                <div class="flex flex-col-reverse divide-y divide-y-reverse bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2">
                                     @foreach($agendaItem->actionPoints as $actionItem)
                                         <div class="text-green-600 dark:text-green-400 bg-gray-100 dark:bg-gray-700 sm:rounded-md py-1 pl-2">
                                             @php
