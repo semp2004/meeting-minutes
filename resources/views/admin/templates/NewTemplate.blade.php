@@ -51,12 +51,9 @@ $lb = "
                               placeholder="Deze vergadering is voor de bespreking van de cijfers"></x-text-input>
             </div>
             <div class="mb-4">
-                <x-input-label for="points" class="w-full pl-0.5">Agenda punten</x-input-label>
-                <x-textarea class="w-full pl-2" name="points"
-                            placeholder="{{$RandomPoint}}" type=""></x-textarea>
-
+                <x-input-label for="topics" class="w-full pl-0.5">Hoofdstukken</x-input-label>
+                <x-textarea name="topics" id="topics" class="w-full pl-2" placeholder="Hoofdstuk #1&#10;Hoofdstuk #2"></x-textarea>
             </div>
-
         </div>
     </form>
 @endsection

@@ -73,9 +73,7 @@ class CommentController extends Controller
 
         $comment->save();
 
-        $meeting_id = $comment->agendaItem->meeting->id;
-
-        return redirect("meeting/$meeting_id");
+        return redirect()->back();
     }
     public function confirmation($id)
     {
@@ -105,10 +103,10 @@ class CommentController extends Controller
         if ($comment->user_id !== Auth::user()->id)
             abort(403);
 
-        $meeting_id = $comment->agendaItem->meeting->id;
+        $meeting_id = $comment->agendaItem->topic->template->meeting->id;
 
         $comment->delete();
 
-        return redirect("meeting/$meeting_id");
+        return redirect("/meeting/" . $meeting_id);
     }
 }

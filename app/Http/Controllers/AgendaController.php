@@ -6,6 +6,7 @@ use App\Models\Agenda;
 use App\Models\AgendaItem;
 use App\Models\Meeting;
 use App\Models\MeetingParticipants;
+use App\Models\Template;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,8 +27,7 @@ class AgendaController extends Controller
         return view('meetings.meeting', [
             'meeting' => $meeting,
             'persons' => $persons,
-            'agendaItems' => $meeting->agendaItems,
-            'actionItems' => $agenda->actionPoints()->get(),
+            'actionItem' => $Meeting->actionItems
         ]);
     }
 
@@ -36,6 +36,7 @@ class AgendaController extends Controller
 
         return view('meetings.newMeeting', [
             'users' => User::get(),
+            'templates' => Template::get(),
         ]);
     }
 
@@ -56,11 +57,13 @@ class AgendaController extends Controller
             'name' => 'required|string|max:255',
             'planned_time' => 'required|date',
             'meeting_participants' => 'required|array|max:255',
+            'template' => 'required|int',
         ]);
 
         $agenda = new Meeting();
         $agenda->name = $data['name'];
         $agenda->planned_time = $data['planned_time'];
+        $agenda->template_id = $data['template'];
 
         $agenda->user_id = auth()->user()->id;
         $agenda->save();

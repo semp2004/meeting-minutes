@@ -14,10 +14,9 @@ return new class extends Migration {
 
             $table -> string('name');
             $table -> longText('header');
-            $table -> longText('points');
 
             $table->timestamps();
-            
+
             $table -> foreign('user_id') -> references('id') -> on('users')->onDelete('cascade') -> onUpdate('cascade');
         });
     }

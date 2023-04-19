@@ -8,6 +8,6 @@ class TemplateSeeder extends Seeder
 {
     public function run(): void
     {
-        \App\Models\Template::factory(10)->create();
+        //\App\Models\Template::factory(10)->create();
     }
 }
